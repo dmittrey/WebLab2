@@ -7,7 +7,7 @@ window.onload = function () {
         let R_value = $('#R_value').val();
         let dot = $('#dot');
 
-        if (validateForm(false)) {
+        if (validateForm()) {
             dot.attr('r', '5px');
             dot.attr('cx', 150 + 100 / R_value * X_value);
             dot.attr('cy', 150 - 100 / R_value * Y_value);

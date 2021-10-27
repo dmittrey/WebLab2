@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="styles/table_section_style.css">
     <link rel="stylesheet" type="text/css" href="styles/user_input_style.css">
     <script src="js/validate_functions.js"></script>
-    <script src="js/table_ajax.js"></script>
+    <script src="js/alert_injector.js"></script>
     <script src="js/dot_animation.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/table_cleaner.js"></script>
@@ -78,7 +78,7 @@
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
         <form id="form"
-              onsubmit="receiveSubmit();
+              onsubmit="injectAlerts();
                         return false;"
               onreset="$('.Error_text').html('');
                        $('#dot').attr('r', '0');">
@@ -89,20 +89,28 @@
                 <!-- Блок для значения Y -->
                 <div class="X_value">
 
+                    <%--                    <select id="X_value" size="1" name="X_value">--%>
+                    <%--                        <option disabled selected>Select coordinate X</option>--%>
+                    <%--                        <option value="-4">-4</option>--%>
+                    <%--                        <option value="-3">-3</option>--%>
+                    <%--                        <option value="-2">-2</option>--%>
+                    <%--                        <option value="-1">-1</option>--%>
+                    <%--                        <option value="0">0</option>--%>
+                    <%--                        <option value="1">1</option>--%>
+                    <%--                        <option value="2">2</option>--%>
+                    <%--                        <option value="3">3</option>--%>
+                    <%--                        <option value="4">4</option>--%>
+                    <%--                    </select>--%>
                     <!-- Кнопки для ввода значения X -->
-                    <label for="X_value">X value:</label>
-                    <select id="X_value" size="1" name="X_value">
-                        <option disabled selected>Select coordinate X</option>
-                        <option value="-4">-4</option>
-                        <option value="-3">-3</option>
-                        <option value="-2">-2</option>
-                        <option value="-1">-1</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                    <label>X value:
+                    <button type="button" name="X_value" value="-3">-3</button>
+                    <button type="button" name="X_value" value="-2">-2</button>
+                    <button type="button" name="X_value" value="-1">-1</button>
+                    <button type="button" name="X_value" value="0">0</button>
+                    <button type="button" name="X_value" value="1">1</button>
+                    <button type="button" name="X_value" value="2">2</button>
+                    <button type="button" name="X_value" value="3">3</button>
+                    </label>
                 </div>
 
                 <!-- Блок для значения Y -->

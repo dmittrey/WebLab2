@@ -31,9 +31,9 @@ function validateXRange(field) {
 }
 
 function validateYRange(field) {
-    return (parseInt(field) > -3) && (parseInt(field) < 3);
+    return (parseInt(field) > -5) && (parseInt(field) < 5);
 }
 
 function validateRRange(field) {
-    return (parseInt(field) > -3) && (parseInt(field) < 3);
+    return (parseInt(field) > 2) && (parseInt(field) < 5);
 }

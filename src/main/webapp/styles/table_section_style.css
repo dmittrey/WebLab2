@@ -1,13 +1,13 @@
 main .table_section {
-    position: absolute;
-    top: 550px;
+    position: relative;
     left: 150px;
+    bottom: 200px;
 }
 
 main .table_section #cleaner {
     position: relative;
     margin: 20px;
-    left: 350px;
+    left: 375px;
 }
 
 main .table_section #cleaner input {
@@ -21,7 +21,7 @@ main .table_section #table {
     position: relative;
     top: 10px;
     left: 40px;
-    width: 900px;
+    width: 950px;
     border: 1px solid black;
 }
 

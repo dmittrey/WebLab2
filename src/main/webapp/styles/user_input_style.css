@@ -21,39 +21,39 @@ main .user_input .X_value {
     margin: 16px;
     position: relative;
     top: 30px;
-    left: 130px;
+    left: 110px;
 }
 
-main .user_input .X_value #X_value {
-    width: 153px;
+main .user_input .selected {
+    background: red;
 }
 
 main .user_input .Y_value {
     margin: 16px;
     position: relative;
     top: 30px;
-    left: 130px;
+    left: 110px;
 }
 
 main .user_input .Y_value #Y_value {
-    width: 145px;
+    width: 195px;
 }
 
 main .user_input .R_value {
     margin: 16px;
     position: relative;
     top: 30px;
-    left: 130px;
+    left: 110px;
 }
 
 main .user_input .R_value #R_value {
-    width: 145px;
+    width: 195px;
 }
 
 main .user_input .Error_text {
     margin: 15px;
     position: relative;
-    top: 30px;
+    top: 45px;
     text-align: center;
     display: flex;
     flex-direction: column;

@@ -1,6 +1,6 @@
 function injectAlerts() {
 
-    let X_value = $('#X_value').val();
+    let X_value = $('.X_value .selected').val();
     let Y_value = $('#Y_value').val();
     let R_value = $('#R_value').val();
     let Error_text = $('.Error_text');
@@ -12,14 +12,12 @@ function injectAlerts() {
 }
 
 function xAlerts(field) {
-    // alert(field);
-    if (field === undefined) {
+    if (!validateButtonExist(field)) {
         return "Не введён параметр X!\n";
     } else return "";
 }
 
 function yAlerts(field) {
-    // alert(field);
     if (validateTextExist(field)) {
         if (validateTextForm(field)) {
             if (validateYRange(field)) {
@@ -30,7 +28,6 @@ function yAlerts(field) {
 }
 
 function rAlerts(field) {
-    // alert(field);
     if (validateTextExist(field)) {
         if (validateTextForm(field)) {
             if (validateRRange(field)) {

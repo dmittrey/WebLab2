@@ -16,6 +16,13 @@
     <script src="js/dot_animation.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/table_cleaner.js"></script>
+`    <script>
+        $(document).on('click', 'button', function () {
+            $('.X_value button').removeClass('selected');
+            $(this).addClass('selected');
+            doAnimate();
+        });
+    </script>`
 </head>
 <body>
 
@@ -54,7 +61,7 @@
             <line x1="140" x2="160" y1="250" y2="250"></line>
             <!-- Прямоугольник в первой четверти -->
             <polygon stroke="blue" fill="blue" fill-opacity="0.3" points="50,150 50,100 150,100 150,150"></polygon>
-            <!-- Четверть эллипса во второй четверти -->
+            <!-- Четверть круга во второй четверти -->
             <path stroke="green" fill="green" fill-opacity="0.3"
                   d="M150,50 A100,100 90 0,1 250,150 L 150,150 Z"></path>
             <!-- Треугольник в третьей четверти -->
@@ -88,28 +95,15 @@
 
                 <!-- Блок для значения Y -->
                 <div class="X_value">
-
-                    <%--                    <select id="X_value" size="1" name="X_value">--%>
-                    <%--                        <option disabled selected>Select coordinate X</option>--%>
-                    <%--                        <option value="-4">-4</option>--%>
-                    <%--                        <option value="-3">-3</option>--%>
-                    <%--                        <option value="-2">-2</option>--%>
-                    <%--                        <option value="-1">-1</option>--%>
-                    <%--                        <option value="0">0</option>--%>
-                    <%--                        <option value="1">1</option>--%>
-                    <%--                        <option value="2">2</option>--%>
-                    <%--                        <option value="3">3</option>--%>
-                    <%--                        <option value="4">4</option>--%>
-                    <%--                    </select>--%>
                     <!-- Кнопки для ввода значения X -->
                     <label>X value:
-                    <button type="button" name="X_value" value="-3">-3</button>
-                    <button type="button" name="X_value" value="-2">-2</button>
-                    <button type="button" name="X_value" value="-1">-1</button>
-                    <button type="button" name="X_value" value="0">0</button>
-                    <button type="button" name="X_value" value="1">1</button>
-                    <button type="button" name="X_value" value="2">2</button>
-                    <button type="button" name="X_value" value="3">3</button>
+                        <button type="button" value="-3">-3</button>
+                        <button type="button" value="-2">-2</button>
+                        <button type="button" value="-1">-1</button>
+                        <button type="button" value="0">0</button>
+                        <button type="button" value="1">1</button>
+                        <button type="button" value="2">2</button>
+                        <button type="button" value="3">3</button>
                     </label>
                 </div>
 

@@ -1,17 +1,13 @@
-function validateForm() {
+function validateForm(x, y, r) {
 
-    let X_value = $('#X_value').val();
-    let Y_value = $('#Y_value').val();
-    let R_value = $('#R_value').val();
-
-    return validateButtonExist(X_value) &&
-        validateXRange(X_value) &&
-        validateTextExist(Y_value) &&
-        validateTextForm(Y_value) &&
-        validateYRange(Y_value) &&
-        validateTextExist(R_value) &&
-        validateTextForm(R_value) &&
-        validateRRange(R_value);
+    return validateButtonExist(x) &&
+        validateXRange(x) &&
+        validateTextExist(y) &&
+        validateTextForm(y) &&
+        validateYRange(y) &&
+        validateTextExist(r) &&
+        validateTextForm(r) &&
+        validateRRange(r);
 }
 
 function validateTextExist(field) {
@@ -19,7 +15,7 @@ function validateTextExist(field) {
 }
 
 function validateButtonExist(field) {
-    return !(field === null);
+    return !(field === undefined);
 }
 
 function validateTextForm(field) {

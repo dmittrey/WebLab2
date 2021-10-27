@@ -12,8 +12,11 @@ function doAnimate() {
     let dot = $('#dot');
 
     if (validateForm(X_value, Y_value, R_value)) {
+
         dot.attr('r', '5px');
         dot.attr('cx', 150 + 100 / R_value * X_value);
         dot.attr('cy', 150 - 100 / R_value * Y_value);
-    } else injectAlerts();
+    }
+
+    injectAlerts();
 }

@@ -14,11 +14,12 @@
     <script src="js/validate_functions.js"></script>
     <script src="js/alert_injector.js"></script>
     <script src="js/dot_animation.js"></script>
+    <script src="js/request_handler.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/table_cleaner.js"></script>
 `    <script>
-        $(document).on('click', 'button', function () {
-            $('.X_value button').removeClass('selected');
+        $(document).on('click', 'input[type="button"]', function () {
+            $('.X_value input[type="button"]').removeClass('selected');
             $(this).addClass('selected');
             doAnimate();
         });
@@ -90,8 +91,8 @@
         </svg>
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
-        <form id="form" method="post" action="./controller"
-              onsubmit="send_request()"
+        <form id="form"
+              onsubmit="return send_request()"
               onreset="reset_page()">
 
             <!-- Блок для ввода значений переменных -->
@@ -101,13 +102,13 @@
                 <div class="X_value">
                     <!-- Кнопки для ввода значения X -->
                     <label>X value:
-                        <button type="button" value="-3">-3</button>
-                        <button type="button" value="-2">-2</button>
-                        <button type="button" value="-1">-1</button>
-                        <button type="button" value="0">0</button>
-                        <button type="button" value="1">1</button>
-                        <button type="button" value="2">2</button>
-                        <button type="button" value="3">3</button>
+                        <input type="button" name="X_value" value="-3">
+                        <input type="button" name="X_value" value="-2">
+                        <input type="button" name="X_value" value="-1">
+                        <input type="button" name="X_value" value="0">
+                        <input type="button" name="X_value" value="1">
+                        <input type="button" name="X_value" value="2">
+                        <input type="button" name="X_value" value="3">
                     </label>
                 </div>
 

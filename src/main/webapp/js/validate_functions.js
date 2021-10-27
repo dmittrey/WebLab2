@@ -1,7 +1,6 @@
 function validateForm(x, y, r) {
 
     return validateButtonExist(x) &&
-        validateXRange(x) &&
         validateTextExist(y) &&
         validateTextForm(y) &&
         validateYRange(y) &&
@@ -20,10 +19,6 @@ function validateButtonExist(field) {
 
 function validateTextForm(field) {
     return (/^(0$|-?[1-9]\d*(\.\d*[1-9]$)?|-?0\.\d*[1-9])$/).test(field);
-}
-
-function validateXRange(field) {
-    return (parseInt(field) > -3) && (parseInt(field) < 3);
 }
 
 function validateYRange(field) {

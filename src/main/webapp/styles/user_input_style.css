@@ -6,7 +6,7 @@ main .user_input svg {
     top: 150px;
 }
 
-main .user_input .form {
+main .user_input form {
     position: absolute;
     top: 150px;
     left: 650px;

@@ -1,4 +1,6 @@
-<%@ page pageEncoding="UTF-8" %>
+<%@ page pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.dmittrey.WebLab2.HitResult" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,12 +53,12 @@
             <line x1="140" x2="160" y1="200" y2="200"></line>
             <line x1="140" x2="160" y1="250" y2="250"></line>
             <!-- Прямоугольник в первой четверти -->
-            <polygon stroke="blue" fill="blue" fill-opacity="0.3" points="50,150 50,50 150,50 150,150"></polygon>
-            <!-- Треугольник во второй четверти -->
-            <polygon stroke="green" fill="green" fill-opacity="0.3" points="150,150 200,150 150,250"></polygon>
-            <!-- Четверть эллипса в третьей четверти -->
-            <path stroke="yellow" fill="yellow" fill-opacity="0.3"
-                  d="M150,100 A50,50 90 0,1 200,150 L 150,150 Z"></path>
+            <polygon stroke="blue" fill="blue" fill-opacity="0.3" points="50,150 50,100 150,100 150,150"></polygon>
+            <!-- Четверть эллипса во второй четверти -->
+            <path stroke="green" fill="green" fill-opacity="0.3"
+                  d="M150,50 A100,100 90 0,1 250,150 L 150,150 Z"></path>
+            <!-- Треугольник в третьей четверти -->
+            <polygon stroke="yellow" fill="yellow" fill-opacity="0.3" points="150,150 200,150 150,200"></polygon>
             <!-- Подписи к осям -->
             <text x="285" y="135">X</text>
             <text x="160" y="15">Y</text>
@@ -75,72 +77,61 @@
         </svg>
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
-        <form id="form" onsubmit="receiveSubmit(); return false;"
-              onreset="$('.Error_text').html(''); $('#dot').attr('r', '0');">
+        <form id="form"
+              onsubmit="receiveSubmit();
+                        return false;"
+              onreset="$('.Error_text').html('');
+                       $('#dot').attr('r', '0');">
 
-            <div class="form">
+            <!-- Блок для ввода значений переменных -->
+            <div class="values">
 
-                <!-- Блок для ввода значений переменных -->
-                <div class="values">
+                <!-- Блок для значения Y -->
+                <div class="X_value">
 
-                    <!-- Блок для значения Y -->
-                    <div class="Y_value">
-
-                        <!-- Поле ввода значения Y -->
-                        <label for="Y_value">Y value:</label>
-                        <input type="text" id="Y_value" name="Y_value" placeholder="Enter coordinate Y">
-                    </div>
-
-                    <!-- Блок для ввода select значений -->
-                    <div class="select_values">
-
-                        <!-- Блок для значения Y -->
-                        <div class="X_value">
-
-                            <!-- Поле ввода значения Y -->
-                            <label for="X_value">X value:</label>
-                            <select id="X_value" size="1" name="X_value">
-                                <option disabled selected>Select coordinate X</option>
-                                <option value="-4">-4</option>
-                                <option value="-3">-3</option>
-                                <option value="-2">-2</option>
-                                <option value="-1">-1</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-
-                        <!-- Блок для значения R -->
-                        <div class="R_value">
-
-                            <!-- Поле ввода значения R -->
-                            <label for="R_value">R value:</label>
-                            <select id="R_value" size="1" name="R_value">
-                                <option disabled selected>Select coordinate R</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                    </div>
+                    <!-- Кнопки для ввода значения X -->
+                    <label for="X_value">X value:</label>
+                    <select id="X_value" size="1" name="X_value">
+                        <option disabled selected>Select coordinate X</option>
+                        <option value="-4">-4</option>
+                        <option value="-3">-3</option>
+                        <option value="-2">-2</option>
+                        <option value="-1">-1</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                 </div>
 
-                <div class="Error_text">
-                    <span id="Y_error"></span>
-                    <span id="X_error"></span>
-                    <span id="R_error"></span>
+                <!-- Блок для значения Y -->
+                <div class="Y_value">
+
+                    <!-- Поле ввода значения Y -->
+                    <label for="Y_value">Y value:</label>
+                    <input type="text" id="Y_value" name="Y_value" placeholder="Enter coordinate Y">
                 </div>
 
-                <!-- Блок для кнопок отправки и обнуления -->
-                <div class="buttons">
-                    <input id="submit" type="submit" value="SUBMIT">
-                    <input id="reset" type="reset" value="RESET">
+                <!-- Блок для значения R -->
+                <div class="R_value">
+
+                    <!-- Поле ввода значения R -->
+                    <label for="R_value">R value:</label>
+                    <input type="text" id="R_value" name="R_value" placeholder="Enter coordinate R">
                 </div>
+            </div>
+
+            <div class="Error_text">
+                <span id="Y_error"></span>
+                <span id="X_error"></span>
+                <span id="R_error"></span>
+            </div>
+
+            <!-- Блок для кнопок отправки и обнуления -->
+            <div class="buttons">
+                <input id="submit" type="submit" value="SUBMIT">
+                <input id="reset" type="reset" value="RESET">
             </div>
         </form>
 

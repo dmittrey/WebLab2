@@ -3,15 +3,15 @@ package com.dmittrey.WebLab2;
 /**
  * Bean class to save hits
  */
-public class HitResult {
+public class Hit {
     private double x;
     private double y;
     private double r;
     private String currentTime;
-    private long executionTime;
+    private double executionTime;
     private boolean result;
 
-    public HitResult() {
+    public Hit() {
     }
 
     public double getX() {
@@ -46,11 +46,11 @@ public class HitResult {
         this.currentTime = currentTime;
     }
 
-    public long getExecutionTime() {
+    public double getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(long executionTime) {
+    public void setExecutionTime(double executionTime) {
         this.executionTime = executionTime;
     }
 

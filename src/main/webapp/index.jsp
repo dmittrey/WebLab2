@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.dmittrey.WebLab2.HitResult" %>
+<%@ page import="com.dmittrey.WebLab2.Hit" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>

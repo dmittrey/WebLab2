@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 public class ControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.setAttribute("startTime", System.nanoTime());
         PrintWriter out = response.getWriter();
         boolean dataIsCorrect = validateX(request.getParameter("x"), out) &&
                 validateY(request.getParameter("y"), out) &&

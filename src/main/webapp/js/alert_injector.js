@@ -9,6 +9,8 @@ function injectAlerts() {
     Error_text.append("<span>" + xAlerts(X_value) + "</span>");
     Error_text.append("<span>" + yAlerts(Y_value) + "</span>");
     Error_text.append("<span>" + rAlerts(R_value) + "</span>");
+
+    return false;
 }
 
 function xAlerts(field) {

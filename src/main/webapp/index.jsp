@@ -23,6 +23,12 @@
             doAnimate();
         });
     </script>`
+    <script>
+        function reset_page(){
+            $('.Error_text').html('');
+            $('#dot').attr('r', '0');
+        }
+    </script>
 </head>
 <body>
 
@@ -84,11 +90,9 @@
         </svg>
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
-        <form id="form"
-              onsubmit="injectAlerts();
-                        return false;"
-              onreset="$('.Error_text').html('');
-                       $('#dot').attr('r', '0');">
+        <form id="form" method="post" action="./controller"
+              onsubmit="send_request()"
+              onreset="reset_page()">
 
             <!-- Блок для ввода значений переменных -->
             <div class="values">

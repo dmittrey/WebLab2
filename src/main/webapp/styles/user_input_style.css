@@ -1,37 +1,26 @@
 main .user_input svg {
     stroke: rgba(175, 175, 175, 0.92);
     fill: rgba(175, 175, 175, 0.92);
-    position: absolute;
+    position: relative;
     left: 200px;
-    top: 150px;
+    top: 100px;
 }
 
 main .user_input form {
-    position: absolute;
-    top: 150px;
+    position: relative;
     left: 650px;
     width: 500px;
     height: 350px;
+    bottom: 250px;
     box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
     background: rgba(25, 25, 25, 0.83);
     border-radius: 20px 20px 20px 20px;
 }
 
-main .user_input .Y_value {
-    margin: 16px;
-    position: relative;
-    top: 15px;
-    left: 130px;
-}
-
-main .user_input .Y_value #Y_value {
-    width: 145px;
-}
-
 main .user_input .X_value {
     margin: 16px;
     position: relative;
-    top: 15px;
+    top: 30px;
     left: 130px;
 }
 
@@ -39,15 +28,26 @@ main .user_input .X_value #X_value {
     width: 153px;
 }
 
+main .user_input .Y_value {
+    margin: 16px;
+    position: relative;
+    top: 30px;
+    left: 130px;
+}
+
+main .user_input .Y_value #Y_value {
+    width: 145px;
+}
+
 main .user_input .R_value {
     margin: 16px;
     position: relative;
-    top: 15px;
+    top: 30px;
     left: 130px;
 }
 
 main .user_input .R_value #R_value {
-    width: 153px;
+    width: 145px;
 }
 
 main .user_input .Error_text {
@@ -68,7 +68,7 @@ main .user_input .Error_text span {
 main .user_input .buttons {
     position: absolute;
     left: 100px;
-    top: 270px;
+    top: 280px;
 }
 
 main .user_input .buttons #submit {

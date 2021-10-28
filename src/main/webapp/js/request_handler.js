@@ -1,5 +1,5 @@
 function send_graph_request(x, y, r) {
-    return request(x, y, r)
+    request(x, y, r)
 }
 
 function send_origin_request() {
@@ -14,15 +14,11 @@ function send_origin_request() {
 }
 
 function request(x, y, r) {
-    // alert(x);
-    // alert(y);
-    // alert(r);
     $.ajax({
         url: "./controller",
         type: "POST",
         data: {'x': x, 'y': y, 'r': r},
         success: function (response) {
-            // alert(response);
             window.location.reload(true);
         },
         error: function (response) {

@@ -171,12 +171,12 @@
                     List<Hit> hitList = HitStorage.getInstance().getHitList();
                     for (Hit nextHit : hitList) {
                         out.println("<tr>");
-                        out.println("<td>" + nextHit.getX() + "</td>");
-                        out.println("<td>" + nextHit.getY() + "</td>");
-                        out.println("<td>" + nextHit.getR() + "</td>");
-                        out.println("<td>" + nextHit.getCurrentTime() + "</td>");
-                        out.println("<td>" + nextHit.getExecutionTime() + "</td>");
-                        out.println("<td>" + nextHit.isResult() + "</td>");
+                        out.println("<th>" + nextHit.getX() + "</th>");
+                        out.println("<th>" + nextHit.getY() + "</th>");
+                        out.println("<th>" + nextHit.getR() + "</th>");
+                        out.println("<th>" + nextHit.getCurrentTime() + "</th>");
+                        out.println("<th>" + nextHit.getExecutionTime() + "</th>");
+                        out.println("<th>" + nextHit.isResult() + "</th>");
                         out.println("</tr>");
                     }
                 %>

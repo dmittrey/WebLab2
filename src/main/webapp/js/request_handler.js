@@ -14,7 +14,7 @@ function send_request() {
                 window.location.reload(true);
             },
             error: function (response) {
-                alert("err: " + response);
+                alert("err: " + response.val());
             }
         });
     } else injectAlerts();

@@ -19,7 +19,6 @@
     <script src="js/request_handler.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/table_cleaner.js"></script>
-    `
     <script>
         $(document).on('click', 'input[type="button"]', function () {
             $('.X_value input[type="button"]').removeClass('selected');
@@ -27,7 +26,6 @@
             doAnimate();
         });
     </script>
-    `
     <script>
         function reset_page() {
             $('.Error_text').html('');
@@ -90,6 +88,17 @@
             <text x="170" y="102.5">R/2</text>
             <text x="170" y="202.5">-R/2</text>
             <text x="170" y="252.5">-R</text>
+            <!--Точки с прошлых тычек -->
+            <%
+                List<Hit> hitList = HitStorage.getInstance().getHitList();
+                for (Hit nextHit : hitList) {
+                    double cx = 150 + 100 / nextHit.getR() * nextHit.getX();
+                    double cy = 150 - 100 / nextHit.getR() * nextHit.getY();
+                    String color = (nextHit.isResult()) ? "green" : "red";
+                    out.println("<circle fill=\"" + color + "\" color=\"" +
+                            color + "\" r=\"" + nextHit.getR() + "\" cx=\"" + cx + "\" cy=\"" + cy + "\"></circle>");
+                }
+            %>
             <!-- Точка показывающая выбор -->
             <circle id="dot" fill="white" color="white" r="0" cx="0" cy="0"></circle>
         </svg>
@@ -168,7 +177,6 @@
                     <th>HIT RESULT</th>
                 </tr>
                 <%
-                    List<Hit> hitList = HitStorage.getInstance().getHitList();
                     for (Hit nextHit : hitList) {
                         out.println("<tr>");
                         out.println("<th>" + nextHit.getX() + "</th>");
@@ -176,7 +184,11 @@
                         out.println("<th>" + nextHit.getR() + "</th>");
                         out.println("<th>" + nextHit.getCurrentTime() + "</th>");
                         out.println("<th>" + nextHit.getExecutionTime() + "</th>");
-                        out.println("<th>" + nextHit.isResult() + "</th>");
+                        if (nextHit.isResult()) {
+                            out.println("<th><span style='color: green'>TRUE</span></th>");
+                        } else {
+                            out.println("<th><span style='color: red'>FALSE</span></th>");
+                        }
                         out.println("</tr>");
                     }
                 %>

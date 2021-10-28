@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class AreaCheckServlet extends HttpServlet {
 
@@ -23,7 +24,7 @@ public class AreaCheckServlet extends HttpServlet {
         hit.setX(x);
         hit.setY(y);
         hit.setR(r);
-        hit.setCurrentTime(LocalDateTime.now().toString());
+        hit.setCurrentTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
         hit.setExecutionTime((double) (System.nanoTime() - (Long) startTime) / 1000000);
         hit.setResult(hitResult);
 

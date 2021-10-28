@@ -32,7 +32,7 @@ public class ControllerServlet extends HttpServlet {
             return false;
         } else {
             try {
-                int x = Integer.parseInt(xString);
+                float x = Float.parseFloat(xString);
                 if (x < -3 || x > 6) {
                     out.println("X is not valid");
                     return false;

@@ -7,13 +7,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Web1Lab</title>
+    <title>Web2Lab</title>
     <link rel="icon" href="icon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="styles/body_style.css">
     <link rel="stylesheet" type="text/css" href="styles/header_style.css">
     <link rel="stylesheet" type="text/css" href="styles/table_section_style.css">
     <link rel="stylesheet" type="text/css" href="styles/user_input_style.css">
     <script src="js/validate_functions.js"></script>
+    <script src="js/shot_detector.js"></script>
     <script src="js/alert_injector.js"></script>
     <script src="js/dot_animation.js"></script>
     <script src="js/request_handler.js"></script>
@@ -25,8 +26,11 @@
             $(this).addClass('selected');
             doAnimate();
         });
-    </script>
-    <script>
+
+        $(document).on('click', 'svg', function (e) {
+            detectMouse(e);
+        });
+
         function reset_page() {
             $('.Error_text').html('');
             $('#dot').attr('r', '0');
@@ -51,7 +55,7 @@
     <section class="user_input">
 
         <!-- Координатная плоскость с содержимым -->
-        <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+        <svg id="graph" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
             <!-- Оси координат -->
             <line x1="0" x2="300" y1="150" y2="150"></line>
             <line x1="150" x2="150" y1="0" y2="300"></line>
@@ -105,7 +109,7 @@
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
         <form id="form"
-              onsubmit="return send_request()"
+              onsubmit="return send_origin_request()"
               onreset="reset_page()">
 
             <!-- Блок для ввода значений переменных -->

@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class AreaCheckServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        int x = Integer.parseInt(request.getParameter("x"));
+        float x = Float.parseFloat(request.getParameter("x"));
         float y = Float.parseFloat(request.getParameter("y"));
         float r = Float.parseFloat(request.getParameter("r"));
 
@@ -34,19 +34,19 @@ public class AreaCheckServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private boolean checkHitResult(int x, float y, float r) {
+    private boolean checkHitResult(float x, float y, float r) {
         return isBlueZone(x, y, r) || isGreenZone(x, y, r) || isYellowZone(x, y, r);
     }
 
-    private boolean isBlueZone(int x, float y, float r) {
+    private boolean isBlueZone(float x, float y, float r) {
         return (x >= -r) && (x <= 0) && (y <= r / 2) && (y >= 0);
     }
 
-    private boolean isGreenZone(int x, float y, float r) {
+    private boolean isGreenZone(float x, float y, float r) {
         return (x >= 0) && (y >= 0) && (Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r, 2));
     }
 
-    private boolean isYellowZone(int x, float y, float r) {
+    private boolean isYellowZone(float x, float y, float r) {
         return (y <= 0) && (x >= 0) && (y >= x - r / 2);
     }
 }

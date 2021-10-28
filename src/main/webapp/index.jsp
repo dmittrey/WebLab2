@@ -166,7 +166,7 @@
 
         <!-- Кнопка очистки таблицы -->
         <div id="cleaner">
-            <input type="button" value="CLEAN TABLE" onclick="cleanTable()">
+            <button onclick="cleanTable()">CLEAN TABLE</button>
         </div>
 
         <!-- Таблица регистрирующая попадания -->

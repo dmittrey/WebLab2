@@ -10,7 +10,7 @@ main .table_section #cleaner {
     left: 375px;
 }
 
-main .table_section #cleaner input {
+main .table_section #cleaner button {
     color: whitesmoke;
     background: rgba(0, 0, 0, 0.83);
     width: 170px;

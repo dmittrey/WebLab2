@@ -1,7 +1,10 @@
 window.onload = function () {
-    document.querySelector('.values').onchange = function () {
+    document.querySelector('#Y_value').onclick = function () {
         doAnimate();
+    }
 
+    document.querySelector('#R_value').onclick = function () {
+        doAnimate();
     }
 }
 

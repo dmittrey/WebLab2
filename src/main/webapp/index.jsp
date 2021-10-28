@@ -1,6 +1,8 @@
 <%@ page pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="com.dmittrey.WebLab2.Hit" %>
+<%@ page import="com.dmittrey.WebLab2.HitStorage" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,15 +19,17 @@
     <script src="js/request_handler.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/table_cleaner.js"></script>
-`    <script>
+    `
+    <script>
         $(document).on('click', 'input[type="button"]', function () {
             $('.X_value input[type="button"]').removeClass('selected');
             $(this).addClass('selected');
             doAnimate();
         });
-    </script>`
+    </script>
+    `
     <script>
-        function reset_page(){
+        function reset_page() {
             $('.Error_text').html('');
             $('#dot').attr('r', '0');
         }
@@ -163,6 +167,19 @@
                     <th>EXECUTION TIME</th>
                     <th>HIT RESULT</th>
                 </tr>
+                <%
+                    List<Hit> hitList = HitStorage.getInstance().getHitList();
+                    for (Hit nextHit : hitList) {
+                        out.println("<tr>");
+                        out.println("<td>" + nextHit.getX() + "</td>");
+                        out.println("<td>" + nextHit.getY() + "</td>");
+                        out.println("<td>" + nextHit.getR() + "</td>");
+                        out.println("<td>" + nextHit.getCurrentTime() + "</td>");
+                        out.println("<td>" + nextHit.getExecutionTime() + "</td>");
+                        out.println("<td>" + nextHit.isResult() + "</td>");
+                        out.println("</tr>");
+                    }
+                %>
             </table>
         </div>
     </section>

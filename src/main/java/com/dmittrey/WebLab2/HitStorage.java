@@ -17,6 +17,10 @@ public class HitStorage {
         return instance;
     }
 
+    public List<Hit> getHitList(){
+        return hitList;
+    }
+
     public synchronized void addHit(Hit aHit) {
         hitList.add(aHit);
     }

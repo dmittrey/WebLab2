@@ -10,8 +10,8 @@ function send_request() {
             type: "POST",
             data: {'x': X_value, 'y': Y_value, 'r': R_value},
             success: function(response){
-                alert(response);
-                // window.location.reload(true);
+                // alert(response);
+                window.location.reload(true);
             },
             error: function (response) {
                 alert("err: " + response);

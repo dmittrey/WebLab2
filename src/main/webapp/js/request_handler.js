@@ -22,7 +22,7 @@ function request(x, y, r) {
             window.location.reload(true);
         },
         error: function (response) {
-            alert("err: " + response.val());
+            alert("Pick correct values of parameters!");
         }
     });
 }

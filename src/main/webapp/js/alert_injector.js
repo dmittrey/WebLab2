@@ -1,36 +1,41 @@
 function injectAlerts() {
+    let X_value = $('.X_value .selected').val();
+    let Y_value = $('#Y_value').val();
+    let R_value = $('#R_value').val();
     let Error_text = $('.Error_text');
-    Error_text.html("");
-    injectXAlerts(Error_text);
-    injectYAlerts(Error_text);
-    injectRAlerts(Error_text);
+
+    Error_text.html("")
+    Error_text.append("<span>" + xAlerts(X_value) + "</span>");
+    Error_text.append("<span>" + yAlerts(Y_value) + "</span>");
+    Error_text.append("<span>" + rAlerts(R_value) + "</span>");
+
     return false;
 }
 
-function injectXAlerts() {
-    let Error_text = $('.Error_text');
-    Error_text.html("");
-    let field = $('.X_value .selected').val();
-    let alert;
+function xAlerts(field) {
     if (!validateButtonExist(field)) {
-        alert = "Не введён параметр X!\n";
-    } else alert = "";
-    Error_text.append(alert);
+        return "Не введён параметр X!\n";
+    } else return "";
 }
 
-function injectYAlerts() {
-    let Error_text = $('.Error_text');
-    Error_text.html("");
-    let field = $('#Y_value').val();
-    let alert;
+function yAlerts(field) {
     if (validateTextExist(field)) {
         if (validateTextForm(field)) {
             if (validateYRange(field)) {
-                alert = "";
-            } else alert = "Параметр Y задается числом в промежутке (-5...5)!\n";
-        } else alert = "Параметр Y задается числом!\n";
-    } else alert = "Не введён параметр Y!\n";
-    Error_text.append(alert);
+                return "";
+            } else return "Параметр Y задается числом в промежутке (-5...5)!\n";
+        } else return "Параметр Y задается числом!\n";
+    } else return "Не введён параметр Y!\n";
+}
+
+function rAlerts(field) {
+    if (validateTextExist(field)) {
+        if (validateTextForm(field)) {
+            if (validateRRange(field)) {
+                return "";
+            } else return "Параметр R задается числом в промежутке (2...5)!\n";
+        } else return "Параметр R задается числом!\n";
+    } else return "Не введён параметр R!\n";
 }
 
 function injectRAlerts() {

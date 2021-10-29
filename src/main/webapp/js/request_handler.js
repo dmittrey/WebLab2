@@ -22,7 +22,7 @@ function request(x, y, r) {
             drawDot(x, y, r, resp.result);
             drawTableRow(x, y, r, resp.currentTime, resp.executionTime, resp.result);
         },
-        error: function (response) {
+        error: function () {
             alert("Parameter's are incorrect!");
         }
     });

@@ -12,6 +12,8 @@ function detectMouse(e) {
         cordY = e.pageY - 183;
         x = (cordX - 150) / 100 * R_value;
         y = (150 - cordY) / 100 * R_value;
-        send_graph_request(x, y, R_value);
+        if (validateYRange(y) && validateXRange(x)) {
+            send_graph_request(String(x), String(y), R_value);
+        } else injectAlerts(String(x), String(y), String(R_value));
     } else injectRAlerts();
 }

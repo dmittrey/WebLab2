@@ -1,10 +1,9 @@
-function injectAlerts() {
-    let X_value = $('.X_value .selected').val();
-    let Y_value = $('#Y_value').val();
-    let R_value = $('#R_value').val();
+function injectAlerts(X_value, Y_value, R_value) {
+    // let X_value = $('.X_value .selected').val();
+    // let Y_value = $('#Y_value').val();
+    // let R_value = $('#R_value').val();
     let Error_text = $('.Error_text');
-
-    Error_text.html("")
+    Error_text.html("");
     Error_text.append("<span>" + xAlerts(X_value) + "</span>");
     Error_text.append("<span>" + yAlerts(Y_value) + "</span>");
     Error_text.append("<span>" + rAlerts(R_value) + "</span>");
@@ -13,9 +12,11 @@ function injectAlerts() {
 }
 
 function xAlerts(field) {
-    if (!validateButtonExist(field)) {
-        return "Не введён параметр X!\n";
-    } else return "";
+    if (validateButtonExist(field)) {
+        if (validateXRange(field)) {
+            return "";
+        } else return "Параметр X задается числом в промежутке (-3...3)!\n";
+    } else return "Не введён параметр X!\n";
 }
 
 function yAlerts(field) {

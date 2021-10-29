@@ -21,10 +21,14 @@ function validateTextForm(field) {
     return (/^(0$|-?[1-9]\d*(\.\d*[1-9]$)?|-?0\.\d*[1-9])$/).test(field);
 }
 
+function validateXRange(field) {
+    return (Number(field) >= -3) && (Number(field) <= 3);
+}
+
 function validateYRange(field) {
-    return (Number(field) > -5) && (Number(field) < 5);
+    return (Number(field) >= -5) && (Number(field) <= 5);
 }
 
 function validateRRange(field) {
-    return (Number(field) > 2) && (Number(field) < 5);
+    return (Number(field) >= 3) && (Number(field) <= 4);
 }

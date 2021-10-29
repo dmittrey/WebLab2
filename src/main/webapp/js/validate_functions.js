@@ -22,9 +22,9 @@ function validateTextForm(field) {
 }
 
 function validateYRange(field) {
-    return (parseInt(field) > -5) && (parseInt(field) < 5);
+    return (Number(field) > -5) && (Number(field) < 5);
 }
 
 function validateRRange(field) {
-    return (parseInt(field) > 2) && (parseInt(field) < 5);
+    return (Number(field) > 2) && (Number(field) < 5);
 }

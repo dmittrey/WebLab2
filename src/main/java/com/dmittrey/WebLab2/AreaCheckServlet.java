@@ -1,6 +1,7 @@
 package com.dmittrey.WebLab2;
 
-import javax.servlet.RequestDispatcher;
+import org.kopitubruk.util.json.JSONUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,6 @@ public class AreaCheckServlet extends HttpServlet {
         float x = Float.parseFloat(request.getParameter("x"));
         float y = Float.parseFloat(request.getParameter("y"));
         float r = Float.parseFloat(request.getParameter("r"));
-
         boolean hitResult = checkHitResult(x, y, r);
         Object startTime = request.getAttribute("startTime");
 
@@ -28,10 +28,13 @@ public class AreaCheckServlet extends HttpServlet {
         hit.setExecutionTime((double) (System.nanoTime() - (Long) startTime) / 1000000);
         hit.setResult(hitResult);
 
+        System.out.println(hitResult);
+
         HitStorage.getInstance().addHit(hit);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./index.jsp");
-        dispatcher.forward(request, response);
+        response.setHeader("Cache-Control", "no-cache");
+        response.setContentType("application/json; charset=UTF-8");
+        JSONUtil.toJSON(hit.getMap(), response.getWriter());
     }
 
     private boolean checkHitResult(float x, float y, float r) {

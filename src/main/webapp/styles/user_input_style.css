@@ -4,6 +4,11 @@ main .user_input svg {
     position: relative;
     left: 200px;
     top: 100px;
+    border-style: dashed;
+    border-width: 2px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    background: rgba(25, 25, 25, 0.83);
+    border-radius: 20px 20px 20px 20px;
 }
 
 main .user_input form {

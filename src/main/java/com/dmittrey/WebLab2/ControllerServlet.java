@@ -17,13 +17,12 @@ public class ControllerServlet extends HttpServlet {
                 validateY(request.getParameter("y"), out) &&
                 validateR(request.getParameter("r"), out);
 
-        RequestDispatcher dispatcher;
         if (dataIsCorrect) {
-            dispatcher = request.getRequestDispatcher("./check");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./check");
+            dispatcher.forward(request, response);
         } else {
-            dispatcher = request.getRequestDispatcher("./index.jsp");
+            response.sendError(400, "Server can't validate data!");
         }
-        dispatcher.forward(request, response);
     }
 
     private boolean validateX(String xString, PrintWriter out) {

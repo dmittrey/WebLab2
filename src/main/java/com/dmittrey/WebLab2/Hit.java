@@ -1,5 +1,8 @@
 package com.dmittrey.WebLab2;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Bean class to save hits
  */
@@ -60,5 +63,17 @@ public class Hit {
 
     public void setResult(boolean result) {
         this.result = result;
+    }
+
+    public Map<String, String> getMap() {
+        Map<String, String> fields = new HashMap<>();
+        fields.put("x", String.valueOf(x));
+        fields.put("y", String.valueOf(y));
+        fields.put("r", String.valueOf(r));
+        fields.put("currentTime", String.valueOf(currentTime));
+        fields.put("executionTime", String.valueOf(executionTime));
+        System.out.println(result);
+        fields.put("result", String.valueOf(result));
+        return fields;
     }
 }

@@ -1,12 +1,23 @@
 package com.dmittrey.WebLab2;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.kopitubruk.util.json.JSONUtil;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Bean class to save hits
  */
-public class Hit {
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+public class Hit implements Serializable {
     private double x;
     private double y;
     private double r;
@@ -14,58 +25,11 @@ public class Hit {
     private double executionTime;
     private boolean result;
 
-    public Hit() {
+    public String jsonHit(){
+        return JSONUtil.toJSON(this.getMap());
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public double getR() {
-        return r;
-    }
-
-    public void setR(double r) {
-        this.r = r;
-    }
-
-    public String getCurrentTime() {
-        return currentTime;
-    }
-
-    public void setCurrentTime(String currentTime) {
-        this.currentTime = currentTime;
-    }
-
-    public double getExecutionTime() {
-        return executionTime;
-    }
-
-    public void setExecutionTime(double executionTime) {
-        this.executionTime = executionTime;
-    }
-
-    public boolean isResult() {
-        return result;
-    }
-
-    public void setResult(boolean result) {
-        this.result = result;
-    }
-
-    public Map<String, String> getMap() {
+    private Map<String, String> getMap() {
         Map<String, String> fields = new HashMap<>();
         fields.put("x", String.valueOf(x));
         fields.put("y", String.valueOf(y));

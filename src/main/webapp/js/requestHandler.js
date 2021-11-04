@@ -19,20 +19,23 @@ function request(x, y, r) {
         type: "POST",
         data: {'x': x, 'y': y, 'r': r},
         success: function (resp) {
-            drawDot(x, y, r, resp.result);
-            drawTableRow(x, y, r, resp.currentTime, resp.executionTime, resp.result);
+            // console.log(resp.length);
+            $('#Alert_text').empty();
+            console.log(resp);
+            drawPoint(resp.x, resp.y, resp.result, resp.r * 2);
+            drawTableRow(resp.x, resp.y, resp.r, resp.currentTime, resp.executionTime, resp.result);
         },
         error: function () {
-            alert("Parameter's are incorrect!");
+            $('#Alert_text').html("The parameters go out of the acceptable range!");
         }
     });
 }
 
 function drawTableRow(x, y, r, currentTime, executionTime, result) {
     let newRow = "<tr>";
-    newRow += "<th>" + x + "</th>";
-    newRow += "<th>" + y + "</th>";
-    newRow += "<th>" + r + "</th>";
+    newRow += "<th>" + parseFloat(x).toFixed(2) + "</th>";
+    newRow += "<th>" + parseFloat(y).toFixed(2) + "</th>";
+    newRow += "<th>" + parseFloat(r).toFixed(2) + "</th>";
     newRow += "<th>" + currentTime + "</th>";
     newRow += "<th>" + executionTime + "</th>";
     newRow += (result === "false" || result === undefined)
@@ -40,16 +43,4 @@ function drawTableRow(x, y, r, currentTime, executionTime, result) {
         : "<th><span style='color: green'>TRUE</span></th>";
     newRow += "</tr>";
     $('#table tr:last').after(newRow);
-}
-
-function drawDot(x, y, r, result) {
-    let cx = 150 + 100 / r * x;
-    let cy = 150 - 100 / r * y;
-    let color = (result === "false" || result === undefined) ? "red" : "green";
-
-    const svg = $('svg');
-    let newDot = svg.html();
-    newDot += "<circle fill=\"" + color + "\" color=\"" + color + "\" " +
-        "cx=\"" + String(cx) + "\" cy=\"" + String(cy) + "\" r=\"" + String(r) + "\">";
-    svg.html(newDot);
 }

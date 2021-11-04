@@ -1,6 +1,10 @@
+<jsp:useBean id="hitStorage" scope="session" class="com.dmittrey.WebLab2.HitStorage"/>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%
+    System.out.println(hitStorage.getCount());
+    System.out.println(hitStorage.jsonHitList());
+%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -9,6 +13,7 @@
     <script src="js/svg.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="js/graphHandler.js"></script>
+    <script type="text/javascript" src="js/requestHandler.js"></script>
     <%--    <script type="text/javascript" src="js/Connector.js"></script>--%>
     <%--    <script type="text/javascript" src="js/CoordinatesValidator.js"></script>--%>
     <%--    <script type="text/javascript" src="js/processData.js"></script>--%>
@@ -21,7 +26,8 @@
     <link rel="stylesheet" type="text/css" href="styles/table_section_style.css">
     <link rel="stylesheet" type="text/css" href="styles/user_input_style.css">
 </head>
-<body onload='{drawPlot()}'>
+
+<body onload='{drawPlot(${hitStorage.jsonHitList()})}'>
 
 <!-- Шапка с именем и группой -->
 <header>
@@ -41,9 +47,9 @@
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
         <form id="form"
-              onclick="switchRadius($('#R_value'))" ;
+              onclick="switchRadius($('#R_value').val())"
               onsubmit=""
-              onreset="reset_page()">
+              onreset="">
 
             <!-- Блок для ввода значений переменных -->
             <div class="values">
@@ -90,6 +96,8 @@
                 <input id="submit" type="submit" value="SUBMIT">
                 <input id="reset" type="reset" value="RESET">
             </div>
+
+            <p id="Alert_text"></p>
         </form>
 
     </section>
@@ -117,5 +125,10 @@
         </div>
     </section>
 </main>
+<script>
+    window.onload = $("#plot").on("click", function (e) {
+        clickPointEvent(e);
+    });
+</script>
 </body>
 </html>

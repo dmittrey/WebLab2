@@ -1,13 +1,11 @@
 let WIDTH = 400;
 let HEIGHT = 400;
-const X_CENTER = 200;
-const Y_CENTER = 200;
 let CANVAS = null;
 const AXES_COLOR = '#a2a2a2';
 const CIRCLE_COLOR = '#234a23';
 const TRIANGLE_COLOR = '#707023';
 const RECTANGLE_COLOR = '#232370';
-let scale = 0.015;
+let scale = 0.014;
 const scaleLastPoint = 10;
 const pointsScale = 5;
 
@@ -15,15 +13,19 @@ let clearedAt = 0;
 let lastElementNum = 0;
 let DEFAULT_R = 5;
 
-drawPlot = () => {
+drawPlot = (attemptsArray) => {
+    console.log("Starting drawing plot!")
+    console.log("Полученный массив точек: \"" + attemptsArray + "\"");
+    // Initial svg
     CANVAS = SVG()
         .addTo('#plot')
         .size(WIDTH, HEIGHT);
-    $('#plot').on('click', function (e) {
-        clickPointEvent(e);
-    });
 
-    initPlot();
+    if (attemptsArray === undefined) {
+        initPlot();
+    } else {
+        drawPlotWithPoints(attemptsArray);
+    }
 }
 
 initPlot = () => {
@@ -34,7 +36,6 @@ initPlot = () => {
 }
 
 drawPlotWithPoints = (attemptsArray) => {
-    console.log('Ready to draw plot!');
     let pointsArray = [];
     attemptsArray.forEach(point => {
         pointsArray.push({
@@ -45,7 +46,7 @@ drawPlotWithPoints = (attemptsArray) => {
         });
     });
     lastElementNum = pointsArray.length - 1;
-    scale = countScale(pointsArray);
+    // scale = countScale(pointsArray);
     let lastPoint = pointsArray[pointsArray.length - 1];
     const r = lastPoint.r;
     console.log('R = ' + r);
@@ -74,51 +75,53 @@ clearPlot = () => {
 }
 
 convertX = (x) => {
-    return X_CENTER + x / (2 * scale);
+    return (WIDTH / 2) + x / (2 * scale);
 }
 
 convertY = (y) => {
-    return Y_CENTER - y / (2 * scale);
+    return (HEIGHT / 2) - y / (2 * scale);
 }
 
 convertToCoordinatesX = (xPoint) => {
-    return (xPoint - X_CENTER) * 2 * scale;
+    return (xPoint - (WIDTH / 2)) * 2 * scale;
 }
 
 convertToCoordinatesY = (yPoint) => {
-    return (Y_CENTER - yPoint) * 2 * scale;
+    return ((HEIGHT / 2) - yPoint) * 2 * scale;
 }
 
 drawAxes = () => {
-    const arrowSize = 10
-    // axis y
+    console.log('Start drawing axes');
+    const arrowSize = 10;
+    // x axe
     CANVAS.line(0, (HEIGHT / 2), WIDTH, (HEIGHT / 2)).stroke({width: 1, color: AXES_COLOR});
-    // axis arrow
+    // x axe arrow
     const triangleX = (WIDTH - arrowSize) + ',' + (HEIGHT / 2 - arrowSize / 2) + ' ' +
         (WIDTH - arrowSize) + ',' + (HEIGHT / 2 + arrowSize / 2) + ' ' +
-        (WIDTH) + ',' + (HEIGHT / 2)
-    CANVAS.polygon(triangleX).fill(AXES_COLOR)
+        (WIDTH) + ',' + (HEIGHT / 2);
+    CANVAS.polygon(triangleX).fill(AXES_COLOR);
+    // x axe label
     CANVAS.text('x').font({
         size: 16,
         family: 'Menlo, sans-serif',
         anchor: 'end',
         fill: AXES_COLOR
-    }).move(WIDTH - 2 * arrowSize, HEIGHT / 2 - 2 * arrowSize)
+    }).move(WIDTH - 2 * arrowSize, HEIGHT / 2 - 2.5 * arrowSize);
 
-    //axis y
+    // y axe
     CANVAS.line(WIDTH / 2, 0, WIDTH / 2, HEIGHT).stroke({width: 1, color: AXES_COLOR});
-    //axis arrow
+    // y axe arrow
     const triangleY = (WIDTH / 2 - arrowSize / 2) + ',' + (arrowSize) + ' ' +
         (WIDTH / 2 + arrowSize / 2) + ',' + (arrowSize) + ' ' +
         (WIDTH / 2) + ',' + (0);
-    console.log('y arrow coordinates ' + triangleY)
-    CANVAS.polygon(triangleY).fill(AXES_COLOR)
+    CANVAS.polygon(triangleY).fill(AXES_COLOR);
+    // y axe label
     CANVAS.text('y').font({
         size: 16,
         family: 'Menlo, sans-serif',
         anchor: 'end',
         fill: AXES_COLOR
-    }).move(WIDTH / 2 - 1.5 * arrowSize, 1.7 * arrowSize)
+    }).move(WIDTH / 2 + 1.5 * arrowSize, arrowSize / 2);
 }
 
 function drawScaleLabel(xStart, xStop, yStart, yStop, labelX, labelY, label) {
@@ -133,16 +136,18 @@ function drawScaleLabel(xStart, xStop, yStart, yStop, labelX, labelY, label) {
 }
 
 drawRValue = (r) => {
-    CANVAS.text('R = ' + r).font({
+    console.log('Start drawing R value:' + r);
+    // todo Запихать в отдельную переменную и вынести форматирование
+    CANVAS.text('R = ' + parseFloat(r).toFixed(2)).font({
         size: 16,
         family: 'Menlo, sans-serif',
         anchor: 'end',
         fill: AXES_COLOR
-    }).move(WIDTH - 50, HEIGHT - 50);
+    }).move(WIDTH - 70, HEIGHT - 50);
 }
 
 drawAxesScaleLabels = (r) => {
-    console.log('Start drawing axes labels')
+    console.log('Start drawing axes labels');
     const hatchLen = 0.1;
     console.log("R value while drawing labels: " + r);
     //x axis labels
@@ -164,12 +169,12 @@ drawArea = (r) => {
         'A' + r / (2 * scale) + ', ' + r / (2 * scale) + ' ' +
         '90 0,1 ' + (convertX(r)) + ', ' + (convertY(0)) + ' L 200,200 Z'
     const triangle = (convertX(0)) + ', ' + (convertY(0)) + ' ' +
-        (convertX(r/2)) + ', ' + (convertY(0)) + ' ' +
-        (convertX(0)) + ', ' + (convertY(-r/2));
+        (convertX(r / 2)) + ', ' + (convertY(0)) + ' ' +
+        (convertX(0)) + ', ' + (convertY(-r / 2));
     CANVAS.path(circlePath)
         .fill(CIRCLE_COLOR)
         .move(convertX(0), convertY(r));
-    CANVAS.rect(r / (2* scale), r / (4 * scale))
+    CANVAS.rect(r / (2 * scale), r / (4 * scale))
         .fill(RECTANGLE_COLOR)
         .move(convertX(-r), convertY(r / 2));
     CANVAS.polygon(triangle)
@@ -177,15 +182,15 @@ drawArea = (r) => {
 }
 
 drawPoint = (x, y, result, pointScale) => {
-    let color = result === true ? '#0f0' : '#f00';
+    let color = (result === "false" || result === undefined) ? '#f00' : '#0f0';
     CANVAS.circle(pointScale).fill(color).move(convertX(x) - pointScale / 2, convertY(y) - pointScale / 2);
 }
 
 function clickPointEvent(event) {
-    // console.log('Start drawing point after click! Received coords: ' + event.pageX + ', ' + event.pageY);
+    console.log("Click working");
     let coordinates = getCoords(event);
     if (!(coordinates.r === "")) {
-        drawPoint(coordinates.x, coordinates.y, false, coordinates.r * 2);
+        send_graph_request(coordinates.x, coordinates.y, coordinates.r);
     }
 }
 
@@ -201,7 +206,10 @@ function getCoords(event) {
 }
 
 function switchRadius(r) {
-    DEFAULT_R = $('#R_value').val();
-    $('#plot').empty();
-    drawPlot();
+    if (r !== "") {
+        console.log("Radius switched to: " + r);
+        DEFAULT_R = r;
+        $('#plot').empty();
+        drawPlot();
+    }
 }

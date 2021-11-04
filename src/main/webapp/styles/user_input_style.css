@@ -89,3 +89,14 @@ main .user_input .buttons #reset {
     width: 150px;
     height: 30px;
 }
+
+main .user_input #Alert_text {
+    margin: 15px;
+    position: relative;
+    top: 180px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    color: red;
+    font-size: 20px;
+}

@@ -1,7 +1,5 @@
 package com.dmittrey.WebLab2;
 
-import org.kopitubruk.util.json.JSONUtil;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,30 +7,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 public class AreaCheckServlet extends HttpServlet {
+    Logger logger = Logger.getLogger(AreaCheckServlet.class.getName());
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
         float x = Float.parseFloat(request.getParameter("x"));
         float y = Float.parseFloat(request.getParameter("y"));
         float r = Float.parseFloat(request.getParameter("r"));
         boolean hitResult = checkHitResult(x, y, r);
         Object startTime = request.getAttribute("startTime");
+        Hit hit = new Hit(x, y, r,
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                (double) (System.nanoTime() - (Long) startTime) / 1000000,
+                hitResult);
 
-        Hit hit = new Hit();
-
-        hit.setX(x);
-        hit.setY(y);
-        hit.setR(r);
-        hit.setCurrentTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-        hit.setExecutionTime((double) (System.nanoTime() - (Long) startTime) / 1000000);
-        hit.setResult(hitResult);
-
-        HitStorage.getInstance().addHit(hit);
+        HitStorage hitStorage = (HitStorage) request.getSession().getAttribute("hitStorage");
+        hitStorage.add(hit);
+//        logger.info(String.valueOf(hitStorage.getCount()));
 
         response.setHeader("Cache-Control", "no-cache");
         response.setContentType("application/json; charset=UTF-8");
-        JSONUtil.toJSON(hit.getMap(), response.getWriter());
+        response.getWriter().println(hit.jsonHit());
     }
 
     private boolean checkHitResult(float x, float y, float r) {

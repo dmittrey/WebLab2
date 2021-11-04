@@ -54,7 +54,6 @@ drawPlotWithPoints = (attemptsArray) => {
 
     drawAxes();
     drawAxesScaleLabels(r);
-    drawGrid();
 
     for (let i = clearedAt; i <= lastElementNum - 1; i++) {
         let point = pointsArray[i];
@@ -89,20 +88,6 @@ convertToCoordinatesX = (xPoint) => {
 
 convertToCoordinatesY = (yPoint) => {
     return (Y_CENTER - yPoint) * 2 * scale;
-}
-
-countScale = (pointsArray) => {
-    const scaleNum = 200; //todo: find better value
-    console.log(JSON.stringify(pointsArray));
-    let max = Math.abs(pointsArray[0].x);
-    let newScale;
-    pointsArray.forEach(point => {
-        newScale = max =
-            (Math.abs(point.x) > max || (Math.abs(point.y) > max)) ?
-                Math.max(Math.abs(point.x), (Math.abs(point.y))) / scaleNum :
-                scale;
-    });
-    return 0.017;
 }
 
 drawAxes = () => {
@@ -176,7 +161,21 @@ drawAxesScaleLabels = (r) => {
 
 
 drawArea = (r) => {
-    CANVAS.circle(r / scale).fill(CIRCLE_COLOR).move(convertX(-r), convertY(r))
+    const circlePath = 'M ' + (convertX(0)) + ', ' + (convertY(r)) + ' ' +
+        'A' + r / (2 * scale) + ', ' + r / (2 * scale) + ' ' +
+        '90 0,1 ' + (convertX(r)) + ', ' + (convertY(0)) + ' L 200,200 Z'
+    const triangle = (convertX(0)) + ', ' + (convertY(0)) + ' ' +
+        (convertX(r/2)) + ', ' + (convertY(0)) + ' ' +
+        (convertX(0)) + ', ' + (convertY(-r/2));
+    CANVAS.path(circlePath)
+        .fill(CIRCLE_COLOR)
+        .move(convertX(0), convertY(r));
+    CANVAS.rect(r / (2* scale), r / (4 * scale))
+        .fill(RECTANGLE_COLOR)
+        .move(convertX(-r), convertY(r / 2));
+    CANVAS.polygon(triangle)
+        .fill(TRIANGLE_COLOR);
+    // CANVAS.rect(r / (2* scale), r / (4 * scale)).fill(RECTANGLE_COLOR).move(convertX(-r), convertY(r / 2));
     // const fillUnusedCircle = (convertX(0)) + ',' + (convertY(0)) + ' ' +
     //     (convertX(-r / 2)) + ',' + (convertY(0)) + ' ' +
     //     (convertX(-r / 2)) + ',' + (convertY(r / 2)) + ' ' +
@@ -214,7 +213,7 @@ function clickPointEvent(event) {
         // document.getElementById('x').value = coordinates.x;
         // document.getElementById('y').value = coordinates.y;
         // document.getElementById('r').value = coordinates.r;
-        drawPoint(coordinates.x, coordinates.y, false, coordinates.r*2);
+        drawPoint(coordinates.x, coordinates.y, false, coordinates.r * 2);
         // removeErrors();
         // if (checkValues(coordinates)) {
         //     console.log('Try to draw point after click. Coordinates: x: ' + coordinates.x + ', y: ' + coordinates.y + ', r: ' + coordinates.r);
@@ -234,7 +233,7 @@ function getCoords(event) {
     return coordinates;
 }
 
-function switchRadius (r) {
+function switchRadius(r) {
     DEFAULT_R = $('#R_value').val();
     $('#plot').empty();
     drawPlot();

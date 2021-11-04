@@ -7,7 +7,6 @@ const AXES_COLOR = '#a2a2a2';
 const CIRCLE_COLOR = '#234a23';
 const TRIANGLE_COLOR = '#707023';
 const RECTANGLE_COLOR = '#232370';
-const BACKGROUND_COLOR = '#1d1d1d';
 let scale = 0.015;
 const scaleLastPoint = 10;
 const pointsScale = 5;
@@ -175,22 +174,6 @@ drawArea = (r) => {
         .move(convertX(-r), convertY(r / 2));
     CANVAS.polygon(triangle)
         .fill(TRIANGLE_COLOR);
-    // CANVAS.rect(r / (2* scale), r / (4 * scale)).fill(RECTANGLE_COLOR).move(convertX(-r), convertY(r / 2));
-    // const fillUnusedCircle = (convertX(0)) + ',' + (convertY(0)) + ' ' +
-    //     (convertX(-r / 2)) + ',' + (convertY(0)) + ' ' +
-    //     (convertX(-r / 2)) + ',' + (convertY(r / 2)) + ' ' +
-    //     (convertX(r / 2)) + ',' + (convertY(r / 2)) + ' ' +
-    //     (convertX(r / 2)) + ',' + (convertY(-r / 2)) + ' ' +
-    //     (convertX(0)) + ',' + (convertY(-r / 2));
-
-    // CANVAS.polygon(fillUnusedCircle).fill(BACKGROUND_COLOR)
-    // const area = (convertX(0)) + ',' + (convertY(0)) + ' ' +
-    //     (convertX(0)) + ',' + (convertY(r)) + ' ' +
-    //     (convertX(r)) + ',' + (convertY(r)) + ' ' +
-    //     (convertX(r)) + ',' + (convertY(0)) + ' ' +
-    //     (convertX(0)) + ',' + (convertY(-r / 2));
-    // console.log('area coordinates ' + area)
-    // CANVAS.polygon(area).fill(BACKGROUND_COLOR)
 }
 
 drawPoint = (x, y, result, pointScale) => {
@@ -198,27 +181,11 @@ drawPoint = (x, y, result, pointScale) => {
     CANVAS.circle(pointScale).fill(color).move(convertX(x) - pointScale / 2, convertY(y) - pointScale / 2);
 }
 
-getCoordinates = () => {
-    let x = parseInt(document.getElementById('x').value)
-    let y = parseFloat(document.getElementById('y').value)
-    let r = parseFloat(document.getElementById('r').value)
-    console.log(x + ', ' + y + ', ' + r)
-    return [x, y, r]
-}
-
 function clickPointEvent(event) {
-    console.log('Start drawing point after click! Received coords: ' + event.pageX + ', ' + event.pageY);
+    // console.log('Start drawing point after click! Received coords: ' + event.pageX + ', ' + event.pageY);
     let coordinates = getCoords(event);
     if (!(coordinates.r === "")) {
-        // document.getElementById('x').value = coordinates.x;
-        // document.getElementById('y').value = coordinates.y;
-        // document.getElementById('r').value = coordinates.r;
         drawPoint(coordinates.x, coordinates.y, false, coordinates.r * 2);
-        // removeErrors();
-        // if (checkValues(coordinates)) {
-        //     console.log('Try to draw point after click. Coordinates: x: ' + coordinates.x + ', y: ' + coordinates.y + ', r: ' + coordinates.r);
-        //     document.getElementById('form').submit();
-        // }
     }
 }
 

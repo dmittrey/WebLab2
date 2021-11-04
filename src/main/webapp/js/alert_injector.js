@@ -1,7 +1,4 @@
 function injectAlerts(X_value, Y_value, R_value) {
-    // let X_value = $('.X_value .selected').val();
-    // let Y_value = $('#Y_value').val();
-    // let R_value = $('#R_value').val();
     let Error_text = $('.Error_text');
     Error_text.html("");
     Error_text.append("<span>" + xAlerts(X_value) + "</span>");

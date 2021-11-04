@@ -72,7 +72,6 @@ public class Hit {
         fields.put("r", String.valueOf(r));
         fields.put("currentTime", String.valueOf(currentTime));
         fields.put("executionTime", String.valueOf(executionTime));
-        System.out.println(result);
         fields.put("result", String.valueOf(result));
         return fields;
     }

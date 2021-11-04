@@ -28,8 +28,6 @@ public class AreaCheckServlet extends HttpServlet {
         hit.setExecutionTime((double) (System.nanoTime() - (Long) startTime) / 1000000);
         hit.setResult(hitResult);
 
-        System.out.println(hitResult);
-
         HitStorage.getInstance().addHit(hit);
 
         response.setHeader("Cache-Control", "no-cache");

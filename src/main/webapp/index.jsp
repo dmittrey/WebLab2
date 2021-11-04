@@ -1,43 +1,27 @@
-<%@ page pageEncoding="UTF-8" isELIgnored="false" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.dmittrey.WebLab2.Hit" %>
-<%@ page import="com.dmittrey.WebLab2.HitStorage" %>
-<%@ page import="java.util.List" %>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE HTML>
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Web2Lab</title>
+    <script src="js/svg.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/graphHandler.js"></script>
+    <%--    <script type="text/javascript" src="js/Connector.js"></script>--%>
+    <%--    <script type="text/javascript" src="js/CoordinatesValidator.js"></script>--%>
+    <%--    <script type="text/javascript" src="js/processData.js"></script>--%>
+    <%--    <link rel="stylesheet" href="styles/main.css">--%>
+    <%--    <link rel="stylesheet" href="styles/mobile.css">--%>
+    <%--    <link rel="stylesheet" href="styles/screen.css">--%>
     <link rel="icon" href="icon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="styles/body_style.css">
     <link rel="stylesheet" type="text/css" href="styles/header_style.css">
     <link rel="stylesheet" type="text/css" href="styles/table_section_style.css">
     <link rel="stylesheet" type="text/css" href="styles/user_input_style.css">
-    <script src="js/validate_functions.js"></script>
-    <script src="js/shot_detector.js"></script>
-    <script src="js/alert_injector.js"></script>
-    <script src="js/dot_animation.js"></script>
-    <script src="js/request_handler.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/table_cleaner.js"></script>
-    <script>
-        $(document).on('click', 'input[type="button"]', function () {
-            $('.X_value input[type="button"]').removeClass('selected');
-            $(this).addClass('selected');
-            doAnimate();
-        });
-
-        $(document).on('click', 'svg', function (e) {
-            detectMouse(e);
-        });
-
-        function reset_page() {
-            $('.Error_text').html('');
-            $('#dot').attr('r', '0');
-        }
-    </script>
 </head>
-<body>
+<body onload='{drawPlot()}'>
 
 <!-- Шапка с именем и группой -->
 <header>
@@ -50,66 +34,15 @@
 
 <!-- Основные элементы -->
 <main>
-
-    <!-- Блок, отвечающий за взаимодействие с пользователем -->
     <section class="user_input">
 
         <!-- Координатная плоскость с содержимым -->
-        <svg id="graph" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
-            <!-- Оси координат -->
-            <line x1="0" x2="300" y1="150" y2="150"></line>
-            <line x1="150" x2="150" y1="0" y2="300"></line>
-            <!-- Стрелки к осям -->
-            <polygon points="150,0 145,15 155,15" stroke="black"></polygon>
-            <polygon points="300,150 285,145 285,155" stroke="black"></polygon>
-            <!-- Метки для значений R на оси X -->
-            <line x1="50" x2="50" y1="140" y2="160"></line>
-            <line x1="100" x2="100" y1="140" y2="160"></line>
-            <line x1="200" x2="200" y1="140" y2="160"></line>
-            <line x1="250" x2="250" y1="140" y2="160"></line>
-            <!-- Метки для значений R на оси Y -->
-            <line x1="140" x2="160" y1="50" y2="50"></line>
-            <line x1="140" x2="160" y1="100" y2="100"></line>
-            <line x1="140" x2="160" y1="200" y2="200"></line>
-            <line x1="140" x2="160" y1="250" y2="250"></line>
-            <!-- Прямоугольник в первой четверти -->
-            <polygon stroke="blue" fill="blue" fill-opacity="0.3" points="50,150 50,100 150,100 150,150"></polygon>
-            <!-- Четверть круга во второй четверти -->
-            <path stroke="green" fill="green" fill-opacity="0.3"
-                  d="M150,50 A100,100 90 0,1 250,150 L 150,150 Z"></path>
-            <!-- Треугольник в третьей четверти -->
-            <polygon stroke="yellow" fill="yellow" fill-opacity="0.3" points="150,150 200,150 150,200"></polygon>
-            <!-- Подписи к осям -->
-            <text x="285" y="135">X</text>
-            <text x="160" y="15">Y</text>
-            <!-- Значения R на оси X -->
-            <text x="40" y="130">-R</text>
-            <text x="85" y="130">-R/2</text>
-            <text x="190" y="130">R/2</text>
-            <text x="245" y="130">R</text>
-            <!-- Значения R на оси Y -->
-            <text x="170" y="52.5">R</text>
-            <text x="170" y="102.5">R/2</text>
-            <text x="170" y="202.5">-R/2</text>
-            <text x="170" y="252.5">-R</text>
-            <!--Точки с прошлых тычек -->
-            <%
-                List<Hit> hitList = HitStorage.getInstance().getHitList();
-                for (Hit nextHit : hitList) {
-                    double cx = 150 + 100 / nextHit.getR() * nextHit.getX();
-                    double cy = 150 - 100 / nextHit.getR() * nextHit.getY();
-                    String color = (nextHit.isResult()) ? "green" : "red";
-                    out.println("<circle fill=\"" + color + "\" color=\"" +
-                            color + "\" r=\"" + nextHit.getR() + "\" cx=\"" + cx + "\" cy=\"" + cy + "\"></circle>");
-                }
-            %>
-            <!-- Точка показывающая выбор -->
-            <circle id="dot" fill="white" color="white" r="0" cx="0" cy="0"></circle>
-        </svg>
+        <div id='plot'></div>
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
         <form id="form"
-              onsubmit="return send_origin_request()"
+              onclick="switchRadius($('#R_value'))" ;
+              onsubmit=""
               onreset="reset_page()">
 
             <!-- Блок для ввода значений переменных -->
@@ -180,22 +113,6 @@
                     <th>EXECUTION TIME</th>
                     <th>HIT RESULT</th>
                 </tr>
-                <%
-                    for (Hit nextHit : hitList) {
-                        out.println("<tr>");
-                        out.println("<th>" + nextHit.getX() + "</th>");
-                        out.println("<th>" + nextHit.getY() + "</th>");
-                        out.println("<th>" + nextHit.getR() + "</th>");
-                        out.println("<th>" + nextHit.getCurrentTime() + "</th>");
-                        out.println("<th>" + nextHit.getExecutionTime() + "</th>");
-                        if (nextHit.isResult()) {
-                            out.println("<th><span style='color: green'>TRUE</span></th>");
-                        } else {
-                            out.println("<th><span style='color: red'>FALSE</span></th>");
-                        }
-                        out.println("</tr>");
-                    }
-                %>
             </table>
         </div>
     </section>

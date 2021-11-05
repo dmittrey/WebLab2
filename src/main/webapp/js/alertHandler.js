@@ -11,6 +11,13 @@ const R_RANGE_ALERT = "Параметр R задается числом в пр�
 const R_FORM_ALERT = "Параметр R задается числом!";
 const R_EXIST_ALERT = "Не введён параметр R!";
 
+injectAlerts = () => {
+    let coordinates = getValues();
+    injectXAlert(coordinates.x);
+    injectYAlert(coordinates.y);
+    injectRAlert(coordinates.r);
+}
+
 injectXAlert = (x) => {
     console.log(xAlerts(x));
     $('#X_error').html(xAlerts(x));

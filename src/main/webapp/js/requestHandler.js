@@ -7,7 +7,7 @@ send_graph_request = (coordinates) => {
 send_origin_request = () => {
     if (validateForm()) {
         request(getValues());
-    }
+    } else injectAlerts();
     return false;
 }
 

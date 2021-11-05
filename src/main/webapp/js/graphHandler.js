@@ -50,7 +50,7 @@ drawPlotWithPoints = (attemptsArray) => {
 
     attemptsArray.forEach(point => {
         console.log(point);
-        drawPoint((point.x / point.r) * DEFAULT_R, (point.y / point.r) * DEFAULT_R, point.result, DEFAULT_R);
+        drawPoint(point.x, point.y, point.result, DEFAULT_R);
     });
 
     drawRValue(DEFAULT_R);
@@ -176,7 +176,8 @@ drawArea = (r) => {
 
 drawPoint = (x, y, result, pointScale) => {
     let color = (result === "false" || result === undefined) ? '#f00' : '#0f0';
-    CANVAS.circle(pointScale*2).fill(color).move(convertX(x) - pointScale / 2, convertY(y) - pointScale / 2);
+    // CANVAS.circle(pointScale*2).fill(color).move(convertX(x) - pointScale / 2, convertY(y) - pointScale / 2);
+    CANVAS.circle(pointScale*2).fill(color).move(convertX(x), convertY(y));
 }
 
 function clickPointEvent(event) {

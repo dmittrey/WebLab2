@@ -27,8 +27,11 @@
     <link rel="stylesheet" type="text/css" href="styles/user_input_style.css">
 </head>
 
-<body onload='{drawPlot(${hitStorage.jsonHitList()})}'>
-
+<%--<%--%>
+<%--    out.println("<body onload='return drawPlot()'>");--%>
+<%--%>--%>
+<%--<body onload='{drawPlot(${hitStorage.jsonHitList()})}'>--%>
+<body>
 <!-- Шапка с именем и группой -->
 <header>
     <div>
@@ -46,11 +49,7 @@
         <div id='plot'></div>
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
-        <form id="form"
-              onclick="switchRadius($('#R_value').val())"
-              onsubmit=""
-              onreset="">
-
+        <form id="form" onclick="switchRadius($('#R_value').val())">
             <!-- Блок для ввода значений переменных -->
             <div class="values">
 
@@ -126,6 +125,10 @@
     </section>
 </main>
 <script>
+    {drawPlot()}
+    {resetDots(
+        <%hitStorage.jsonHitList();%>
+    )}
     window.onload = $("#plot").on("click", function (e) {
         clickPointEvent(e);
     });

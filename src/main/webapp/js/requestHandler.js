@@ -22,7 +22,8 @@ function request(x, y, r) {
             // console.log(resp.length);
             $('#Alert_text').empty();
             console.log(resp);
-            drawPoint(resp.x, resp.y, resp.result, resp.r * 2);
+            addPoint(resp.x, resp.y, resp.r, resp.result);
+            drawPoint(resp.x, resp.y, resp.result, resp.r);
             drawTableRow(resp.x, resp.y, resp.r, resp.currentTime, resp.executionTime, resp.result);
         },
         error: function () {

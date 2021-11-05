@@ -8,20 +8,24 @@ const RECTANGLE_COLOR = '#232370';
 let scale = 0.014;
 const scaleLastPoint = 10;
 const pointsScale = 5;
+let attemptsArray = []
 
 let clearedAt = 0;
 let lastElementNum = 0;
 let DEFAULT_R = 5;
 
-drawPlot = (attemptsArray) => {
+// 2) На jsp добавить просто drawPlot и заполнение таблицы э
+
+
+drawPlot = () => {
     console.log("Starting drawing plot!")
-    console.log("Полученный массив точек: \"" + attemptsArray + "\"");
+    // console.log("Полученный массив точек: \"" + attemptsArray + "\"");
     // Initial svg
     CANVAS = SVG()
         .addTo('#plot')
         .size(WIDTH, HEIGHT);
 
-    if (attemptsArray === undefined) {
+    if (attemptsArray.length === 0) {
         initPlot();
     } else {
         drawPlotWithPoints(attemptsArray);
@@ -29,6 +33,7 @@ drawPlot = (attemptsArray) => {
 }
 
 initPlot = () => {
+    console.log("Строим без точек.")
     drawArea(DEFAULT_R);
     drawAxes();
     drawAxesScaleLabels(DEFAULT_R);
@@ -36,43 +41,31 @@ initPlot = () => {
 }
 
 drawPlotWithPoints = (attemptsArray) => {
-    let pointsArray = [];
-    attemptsArray.forEach(point => {
-        pointsArray.push({
-            x: (point.coordinates).x,
-            y: (point.coordinates).y,
-            r: (point.coordinates).r,
-            result: point.doFitArea,
-        });
-    });
-    lastElementNum = pointsArray.length - 1;
-    // scale = countScale(pointsArray);
-    let lastPoint = pointsArray[pointsArray.length - 1];
-    const r = lastPoint.r;
-    console.log('R = ' + r);
-    drawArea(r);
+    console.log("Строим вместе с точками.")
+
+    drawArea(DEFAULT_R);
 
     drawAxes();
-    drawAxesScaleLabels(r);
+    drawAxesScaleLabels(DEFAULT_R);
 
-    for (let i = clearedAt; i <= lastElementNum - 1; i++) {
-        let point = pointsArray[i];
-        drawPoint(point.x, point.y, point.result, pointsScale);
-    }
-    drawPoint(lastPoint.x, lastPoint.y, lastPoint.result, scaleLastPoint);
-    drawRValue(r);
+    attemptsArray.forEach(point => {
+        console.log(point);
+        drawPoint((point.x / point.r) * DEFAULT_R, (point.y / point.r) * DEFAULT_R, point.result, DEFAULT_R);
+    });
+
+    drawRValue(DEFAULT_R);
 }
 
-clearPlot = () => {
-    if (submitGetRequest({session: "clear"}, "/web-lab-2-1.2/controller")) {
-        initPlot();
-        $("#table_body").empty();
-    } else {
-        removeErrors();
-        printError("can't clear session", "clear session",
-            "Can't clear plot and table", document.getElementById("clearButton"));
-    }
-}
+// clearPlot = () => {
+//     if (submitGetRequest({session: "clear"}, "/web-lab-2-1.2/controller")) {
+//         initPlot();
+//         $("#table_body").empty();
+//     } else {
+//         removeErrors();
+//         printError("can't clear session", "clear session",
+//             "Can't clear plot and table", document.getElementById("clearButton"));
+//     }
+// }
 
 convertX = (x) => {
     return (WIDTH / 2) + x / (2 * scale);
@@ -183,7 +176,7 @@ drawArea = (r) => {
 
 drawPoint = (x, y, result, pointScale) => {
     let color = (result === "false" || result === undefined) ? '#f00' : '#0f0';
-    CANVAS.circle(pointScale).fill(color).move(convertX(x) - pointScale / 2, convertY(y) - pointScale / 2);
+    CANVAS.circle(pointScale*2).fill(color).move(convertX(x) - pointScale / 2, convertY(y) - pointScale / 2);
 }
 
 function clickPointEvent(event) {
@@ -211,5 +204,23 @@ function switchRadius(r) {
         DEFAULT_R = r;
         $('#plot').empty();
         drawPlot();
+    }
+}
+
+function addPoint(x, y, r, result) {
+    attemptsArray.push({
+        x: x,
+        y: y,
+        r: r,
+        result: result,
+    });
+    console.log(attemptsArray.length);
+    console.log(attemptsArray[attemptsArray.length-1]);
+}
+
+function resetDots(newAttemptsArray) {
+    if (newAttemptsArray !== undefined) {
+        console.log(newAttemptsArray);
+        attemptsArray = newAttemptsArray;
     }
 }

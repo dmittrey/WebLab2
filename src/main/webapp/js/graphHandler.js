@@ -1,22 +1,21 @@
 let WIDTH = 400;
 let HEIGHT = 400;
+
 let CANVAS = null;
+
 const AXES_COLOR = '#a2a2a2';
 const CIRCLE_COLOR = '#234a23';
 const TRIANGLE_COLOR = '#707023';
 const RECTANGLE_COLOR = '#232370';
+
 let scale = 0.014;
+
 let attemptsArray = []
 
 let DEFAULT_R = 5;
 
-// 2) На jsp добавить просто drawPlot и заполнение таблицы э
-
-
 drawPlot = () => {
     console.log("Starting drawing plot!")
-    // console.log("Полученный массив точек: \"" + attemptsArray + "\"");
-    // Initial svg
     CANVAS = SVG()
         .addTo('#plot')
         .size(WIDTH, HEIGHT);
@@ -38,31 +37,16 @@ initPlot = () => {
 
 drawPlotWithPoints = (attemptsArray) => {
     console.log("Строим вместе с точками.")
-
     drawArea(DEFAULT_R);
-
     drawAxes();
     drawAxesScaleLabels(DEFAULT_R);
-
     attemptsArray.forEach(point => {
         console.log(point);
         console.log(point.x);
         drawPoint(point.x, point.y, point.result, DEFAULT_R);
     });
-
     drawRValue(DEFAULT_R);
 }
-
-// clearPlot = () => {
-//     if (submitGetRequest({session: "clear"}, "/web-lab-2-1.2/controller")) {
-//         initPlot();
-//         $("#table_body").empty();
-//     } else {
-//         removeErrors();
-//         printError("can't clear session", "clear session",
-//             "Can't clear plot and table", document.getElementById("clearButton"));
-//     }
-// }
 
 convertX = (x) => {
     return (WIDTH / 2) + x / (2 * scale);
@@ -81,7 +65,6 @@ convertToCoordinatesY = (yPoint) => {
 }
 
 drawAxes = () => {
-    console.log('Start drawing axes');
     const arrowSize = 10;
     // x axe
     CANVAS.line(0, (HEIGHT / 2), WIDTH, (HEIGHT / 2)).stroke({width: 1, color: AXES_COLOR});
@@ -114,7 +97,7 @@ drawAxes = () => {
     }).move(WIDTH / 2 + 1.5 * arrowSize, arrowSize / 2);
 }
 
-function drawScaleLabel(xStart, xStop, yStart, yStop, labelX, labelY, label) {
+drawScaleLabel = (xStart, xStop, yStart, yStop, labelX, labelY, label) => {
     CANVAS.line(convertX(xStart), convertY(yStart), convertX(xStop), convertY(yStop))
         .stroke({width: 2, color: AXES_COLOR});
     CANVAS.text(label).font({
@@ -127,7 +110,6 @@ function drawScaleLabel(xStart, xStop, yStart, yStop, labelX, labelY, label) {
 
 drawRValue = (r) => {
     console.log('Start drawing R value:' + r);
-    // todo Запихать в отдельную переменную и вынести форматирование
     CANVAS.text('R = ' + parseFloat(r).toFixed(2)).font({
         size: 16,
         family: 'Menlo, sans-serif',
@@ -137,7 +119,6 @@ drawRValue = (r) => {
 }
 
 drawAxesScaleLabels = (r) => {
-    console.log('Start drawing axes labels');
     const hatchLen = 0.1;
     console.log("R value while drawing labels: " + r);
     //x axis labels
@@ -152,7 +133,6 @@ drawAxesScaleLabels = (r) => {
     drawScaleLabel(hatchLen, -hatchLen, r / 2, r / 2, -4 * hatchLen, r / 2, "R/2");
     drawScaleLabel(hatchLen, -hatchLen, r, r, -4 * hatchLen, r, "R");
 }
-
 
 drawArea = (r) => {
     const circlePath = 'M ' + (convertX(0)) + ', ' + (convertY(r)) + ' ' +
@@ -173,56 +153,50 @@ drawArea = (r) => {
 
 drawPoint = (x, y, result, pointScale) => {
     let color = (result === "false" || result === undefined) ? '#f00' : '#0f0';
-    // CANVAS.circle(pointScale*2).fill(color).move(convertX(x) - pointScale / 2, convertY(y) - pointScale / 2);
-    CANVAS.circle(pointScale*2).fill(color).move(convertX(x), convertY(y));
+    CANVAS.circle(pointScale * 2).fill(color).move(convertX(x) - pointScale, convertY(y) - pointScale);
 }
 
-function clickPointEvent(event) {
-    console.log("Click working");
+clickPointEvent = (event) => {
     let coordinates = getCoords(event);
-    if (!(coordinates.r === "")) {
-        send_graph_request(coordinates.x, coordinates.y, coordinates.r);
-    }
+    console.log("Click working at coordinates: " + coordinates.x + ", " + coordinates.y + ", " + coordinates.r);
+    send_graph_request(coordinates);
 }
 
-function getCoords(event) {
+getCoords = (event) => {
     let coordinates = {};
     coordinates.x = convertToCoordinatesX(event.pageX - 100);
     coordinates.y = convertToCoordinatesY(event.pageY - 183);
     coordinates.r = $("#R_value").val();
-    console.log('X: ' + coordinates.x);
-    console.log('Y: ' + coordinates.y);
-    console.log('R: ' + coordinates.r);
     return coordinates;
 }
 
-function switchRadius(r) {
-    if (r !== "") {
-        console.log("Radius switched to: " + r);
-        DEFAULT_R = r;
-        $('#plot').empty();
-        drawPlot();
-    }
+switchRadius = (values) => {
+    console.log("Radius switched to: " + values.r);
+    DEFAULT_R = values.r;
+    $('#plot').empty();
+    drawPlot();
 }
 
-function addPoint(x, y, r, result) {
+addPoint = (x, y, r, result) => {
     attemptsArray.push({
         x: x,
         y: y,
         r: r,
         result: result,
     });
-    console.log(attemptsArray.length);
-    console.log(attemptsArray[attemptsArray.length-1]);
 }
 
-function resetDots(newAttemptsArray) {
-    if (newAttemptsArray.length !== 0) {
-        // console.log(JSON.parse(newAttemptsArray));
-
+resetDots = (newAttemptsArray) => {
+    if (newAttemptsArray.length !== 0) { // Новая ли сессия
         attemptsArray = [];
         newAttemptsArray.forEach(dot => {
             attemptsArray.push(JSON.parse(dot));
         })
     }
+}
+
+cleanPlot = () => {
+    $('#plot').empty();
+    attemptsArray = [];
+    drawPlot();
 }

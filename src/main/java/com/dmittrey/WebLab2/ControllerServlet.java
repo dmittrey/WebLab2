@@ -16,8 +16,8 @@ public class ControllerServlet extends HttpServlet {
 //        logger.info("request is come");
         request.setAttribute("startTime", System.nanoTime());
 
-        Object hitStorage = request.getSession().getAttribute("hitStorage");
-        if (hitStorage == null) request.getSession().setAttribute("hitStorage", new HitStorage());
+//        Object hitStorage = request.getSession().getAttribute("hitStorage");
+//        if (hitStorage == null) request.getSession().setAttribute("hitStorage", new HitStorage());
 
         boolean dataIsCorrect = validateX(request.getParameter("x")) &&
                 validateY(request.getParameter("y")) &&

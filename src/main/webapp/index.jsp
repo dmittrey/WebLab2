@@ -7,21 +7,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Web2Lab</title>
-    <script src="js/svg.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/svg.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="js/graphHandler.js"></script>
     <script type="text/javascript" src="js/requestHandler.js"></script>
-    <%--    <script type="text/javascript" src="js/Connector.js"></script>--%>
-    <%--    <script type="text/javascript" src="js/CoordinatesValidator.js"></script>--%>
-    <%--    <script type="text/javascript" src="js/processData.js"></script>--%>
-    <%--    <link rel="stylesheet" href="styles/main.css">--%>
-    <%--    <link rel="stylesheet" href="styles/mobile.css">--%>
-    <%--    <link rel="stylesheet" href="styles/screen.css">--%>
+    <script type="text/javascript" src="js/dataHandler.js"></script>
+    <script type="text/javascript" src="js/tableHandler.js"></script>
+    <script type="text/javascript" src="js/windowHandler.js"></script>
+    <script type="text/javascript" src="js/alertHandler.js"></script>
     <link rel="icon" href="icon/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="styles/body_style.css">
-    <link rel="stylesheet" type="text/css" href="styles/header_style.css">
-    <link rel="stylesheet" type="text/css" href="styles/table_section_style.css">
-    <link rel="stylesheet" type="text/css" href="styles/user_input_style.css">
+    <link rel="stylesheet" type="text/css" href="styles/body.css">
+    <link rel="stylesheet" type="text/css" href="styles/header.css">
+    <link rel="stylesheet" type="text/css" href="styles/table.css">
+    <link rel="stylesheet" type="text/css" href="styles/user_input.css">
 </head>
 
 <body>
@@ -29,7 +27,7 @@
 <header>
     <div>
         <span>Dmitry Zubakhin</span>
-        <span>P3221</span>
+        <span>P3231</span>
         <span>Variant 5487</span>
     </div>
 </header>
@@ -42,7 +40,7 @@
         <div id='plot'></div>
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
-        <form id="form" onclick="switchRadius($('#R_value').val())">
+        <form id="form" onsubmit="return send_origin_request()">
             <!-- Блок для ввода значений переменных -->
             <div class="values">
 
@@ -78,8 +76,8 @@
             </div>
 
             <div class="Error_text">
-                <span id="Y_error"></span>
                 <span id="X_error"></span>
+                <span id="Y_error"></span>
                 <span id="R_error"></span>
             </div>
 
@@ -89,18 +87,18 @@
                 <input id="reset" type="reset" value="RESET">
             </div>
 
-            <p id="Alert_text"></p>
+            <div id="Alert_text">
+            </div>
         </form>
-
     </section>
 
     <!-- Блоки связанные с таблицей -->
     <section class="table_section">
 
         <!-- Кнопка очистки таблицы -->
-        <div id="cleaner">
-            <button onclick="cleanTable()">CLEAN TABLE</button>
-        </div>
+<%--        <div id="cleaner">--%>
+<%--            <button>CLEAN TABLE</button>--%>
+<%--        </div>--%>
 
         <!-- Таблица регистрирующая попадания -->
         <div>
@@ -137,10 +135,6 @@
     {resetDots(
         <%out.println(hitStorage.jsonHitList());%>
     )}
-    {drawPlot()}
-    window.onload = $("#plot").on("click", function (e) {
-        clickPointEvent(e);
-    });
 </script>
 </body>
 </html>

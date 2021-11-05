@@ -23,9 +23,10 @@ public class AreaCheckServlet extends HttpServlet {
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
                 (double) (System.nanoTime() - (Long) startTime) / 1000000,
                 hitResult);
+//        request.setAttribute("hit", hit);
 
-        HitStorage hitStorage = (HitStorage) request.getSession().getAttribute("hitStorage");
-        hitStorage.add(hit);
+//        HitStorage hitStorage = (HitStorage) request.getSession().getAttribute("hitStorage");
+//        hitStorage.add(hit);
 //        logger.info(String.valueOf(hitStorage.getCount()));
 
         response.setHeader("Cache-Control", "no-cache");

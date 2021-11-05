@@ -1,10 +1,7 @@
+<%@ page import="com.dmittrey.WebLab2.Hit" %>
 <jsp:useBean id="hitStorage" scope="session" class="com.dmittrey.WebLab2.HitStorage"/>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    System.out.println(hitStorage.getCount());
-    System.out.println(hitStorage.jsonHitList());
-%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -27,10 +24,6 @@
     <link rel="stylesheet" type="text/css" href="styles/user_input_style.css">
 </head>
 
-<%--<%--%>
-<%--    out.println("<body onload='return drawPlot()'>");--%>
-<%--%>--%>
-<%--<body onload='{drawPlot(${hitStorage.jsonHitList()})}'>--%>
 <body>
 <!-- Шапка с именем и группой -->
 <header>
@@ -120,15 +113,31 @@
                     <th>EXECUTION TIME</th>
                     <th>HIT RESULT</th>
                 </tr>
+                <%
+                    for (Hit nextHit : hitStorage.getHitList()) {
+                        out.println("<tr>");
+                        out.println("<th>" + String.format("%.3f", nextHit.getX()) + "</th>");
+                        out.println("<th>" + String.format("%.3f",nextHit.getY()) + "</th>");
+                        out.println("<th>" + String.format("%.3f",nextHit.getR()) + "</th>");
+                        out.println("<th>" + nextHit.getCurrentTime() + "</th>");
+                        out.println("<th>" + nextHit.getExecutionTime() + "</th>");
+                        if (nextHit.isResult()) {
+                            out.println("<th><span style='color: green'>TRUE</span></th>");
+                        } else {
+                            out.println("<th><span style='color: red'>FALSE</span></th>");
+                        }
+                        out.println("</tr>");
+                    }
+                %>
             </table>
         </div>
     </section>
 </main>
 <script>
-    {drawPlot()}
     {resetDots(
-        <%hitStorage.jsonHitList();%>
+        <%out.println(hitStorage.jsonHitList());%>
     )}
+    {drawPlot()}
     window.onload = $("#plot").on("click", function (e) {
         clickPointEvent(e);
     });

@@ -6,12 +6,8 @@ const CIRCLE_COLOR = '#234a23';
 const TRIANGLE_COLOR = '#707023';
 const RECTANGLE_COLOR = '#232370';
 let scale = 0.014;
-const scaleLastPoint = 10;
-const pointsScale = 5;
 let attemptsArray = []
 
-let clearedAt = 0;
-let lastElementNum = 0;
 let DEFAULT_R = 5;
 
 // 2) На jsp добавить просто drawPlot и заполнение таблицы э
@@ -50,6 +46,7 @@ drawPlotWithPoints = (attemptsArray) => {
 
     attemptsArray.forEach(point => {
         console.log(point);
+        console.log(point.x);
         drawPoint(point.x, point.y, point.result, DEFAULT_R);
     });
 
@@ -220,8 +217,12 @@ function addPoint(x, y, r, result) {
 }
 
 function resetDots(newAttemptsArray) {
-    if (newAttemptsArray !== undefined) {
-        console.log(newAttemptsArray);
-        attemptsArray = newAttemptsArray;
+    if (newAttemptsArray.length !== 0) {
+        // console.log(JSON.parse(newAttemptsArray));
+
+        attemptsArray = [];
+        newAttemptsArray.forEach(dot => {
+            attemptsArray.push(JSON.parse(dot));
+        })
     }
 }

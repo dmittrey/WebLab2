@@ -65,7 +65,7 @@
 
                     <!-- Поле ввода значения Y -->
                     <label for="Y_value">Y value:</label>
-                    <input type="text" id="Y_value" name="Y_value" placeholder="Enter coordinate Y">
+                    <input type="text" id="Y_value" name="Y_value" placeholder="Enter coordinate Y" maxlength="5">
                 </div>
 
                 <!-- Блок для значения R -->
@@ -73,7 +73,7 @@
 
                     <!-- Поле ввода значения R -->
                     <label for="R_value">R value:</label>
-                    <input type="text" id="R_value" name="R_value" placeholder="Enter coordinate R">
+                    <input type="text" id="R_value" name="R_value" placeholder="Enter coordinate R" maxlength="5">
                 </div>
             </div>
 

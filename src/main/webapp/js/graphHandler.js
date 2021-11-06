@@ -110,12 +110,12 @@ drawScaleLabel = (xStart, xStop, yStart, yStop, labelX, labelY, label) => {
 
 drawRValue = (r) => {
     console.log('Start drawing R value:' + r);
-    CANVAS.text('R = ' + parseFloat(r).toFixed(2)).font({
+    CANVAS.text('R = ' + parseFloat(r).toFixed(3)).font({
         size: 16,
         family: 'Menlo, sans-serif',
         anchor: 'end',
         fill: AXES_COLOR
-    }).move(WIDTH - 70, HEIGHT - 50);
+    }).move(WIDTH - 77, HEIGHT - 50);
 }
 
 drawAxesScaleLabels = (r) => {

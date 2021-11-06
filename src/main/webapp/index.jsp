@@ -1,7 +1,9 @@
-<%@ page import="com.dmittrey.WebLab2.Hit" %>
-<jsp:useBean id="hitStorage" scope="session" class="com.dmittrey.WebLab2.HitStorage"/>
+<%@ page import="com.dmittrey.WebLab2.entities.Hit" %>
+<%@ page import="com.dmittrey.WebLab2.servlets.HitListFormatter" %>
+<jsp:useBean id="hitStorage" scope="session" class="com.dmittrey.WebLab2.beans.HitStorage"/>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%HitListFormatter beanFormatter = new HitListFormatter(hitStorage);%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -96,9 +98,9 @@
     <section class="table_section">
 
         <!-- Кнопка очистки таблицы -->
-<%--        <div id="cleaner">--%>
-<%--            <button>CLEAN TABLE</button>--%>
-<%--        </div>--%>
+        <%--        <div id="cleaner">--%>
+        <%--            <button>CLEAN TABLE</button>--%>
+        <%--        </div>--%>
 
         <!-- Таблица регистрирующая попадания -->
         <div>
@@ -111,30 +113,15 @@
                     <th>EXECUTION TIME</th>
                     <th>HIT RESULT</th>
                 </tr>
-                <%
-                    for (Hit nextHit : hitStorage.getHitList()) {
-                        out.println("<tr>");
-                        out.println("<th>" + String.format("%.3f", nextHit.getX()) + "</th>");
-                        out.println("<th>" + String.format("%.3f",nextHit.getY()) + "</th>");
-                        out.println("<th>" + String.format("%.3f",nextHit.getR()) + "</th>");
-                        out.println("<th>" + nextHit.getCurrentTime() + "</th>");
-                        out.println("<th>" + nextHit.getExecutionTime() + "</th>");
-                        if (nextHit.isResult()) {
-                            out.println("<th><span style='color: green'>TRUE</span></th>");
-                        } else {
-                            out.println("<th><span style='color: red'>FALSE</span></th>");
-                        }
-                        out.println("</tr>");
-                    }
-                %>
+                <%=beanFormatter.getRows()%>
             </table>
         </div>
     </section>
 </main>
 <script>
-    {resetDots(
-        <%out.println(hitStorage.jsonHitList());%>
-    )}
+    {
+        resetDots(<%=beanFormatter.getJson()%>)
+    }
 </script>
 </body>
 </html>

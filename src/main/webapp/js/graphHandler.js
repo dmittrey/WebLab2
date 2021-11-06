@@ -159,7 +159,7 @@ drawPoint = (x, y, result, pointScale) => {
 clickPointEvent = (event) => {
     let coordinates = getCoords(event);
     console.log("Click working at coordinates: " + coordinates.x + ", " + coordinates.y + ", " + coordinates.r);
-    send_graph_request(coordinates);
+    if (validateR(coordinates.r)) send_graph_request(coordinates);
 }
 
 getCoords = (event) => {

@@ -1,9 +1,9 @@
-package com.dmittrey.WebLab2;
+package com.dmittrey.WebLab2.beans;
 
+import com.dmittrey.WebLab2.entities.Hit;
 import jdk.nashorn.internal.runtime.logging.Logger;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kopitubruk.util.json.JSONUtil;
 
 import javax.inject.Named;
 import java.io.Serializable;
@@ -17,25 +17,12 @@ public class HitStorage implements Serializable {
     @Setter
     private List<Hit> hitList = Collections.synchronizedList(new LinkedList<>());
 
-    public void clear() {
-        hitList.clear();
-    }
-
-    public Hit[] getHitList(){
-        return hitList.toArray(new Hit[0]);
+    public List<Hit> getHitList(){
+        return hitList;
     }
 
     public int getCount(){
         return hitList.size();
-    }
-
-    public String jsonHitList() {
-        Set<String> jsonHitList = new HashSet<>();
-        hitList.forEach(hit -> {
-            String jsonHit = hit.jsonHit();
-            jsonHitList.add(jsonHit);
-        });
-        return JSONUtil.toJSON(jsonHitList);
     }
 
     public void add(Hit aHit) {

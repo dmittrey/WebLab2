@@ -1,4 +1,4 @@
-package com.dmittrey.WebLab2;
+package com.dmittrey.WebLab2.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class Hit implements Serializable {
     private double executionTime;
     private boolean result;
 
-    public String jsonHit(){
+    public String jsonHit() {
         return JSONUtil.toJSON(this.getMap());
     }
 

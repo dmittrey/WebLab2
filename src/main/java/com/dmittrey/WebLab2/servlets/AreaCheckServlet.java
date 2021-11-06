@@ -1,4 +1,7 @@
-package com.dmittrey.WebLab2;
+package com.dmittrey.WebLab2.servlets;
+
+import com.dmittrey.WebLab2.beans.HitStorage;
+import com.dmittrey.WebLab2.entities.Hit;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -7,10 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Logger;
 
 public class AreaCheckServlet extends HttpServlet {
-    Logger logger = Logger.getLogger(AreaCheckServlet.class.getName());
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -19,15 +20,13 @@ public class AreaCheckServlet extends HttpServlet {
         float r = Float.parseFloat(request.getParameter("r"));
         boolean hitResult = checkHitResult(x, y, r);
         Object startTime = request.getAttribute("startTime");
+
         Hit hit = new Hit(x, y, r,
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
                 (double) (System.nanoTime() - (Long) startTime) / 1000000,
                 hitResult);
-//        request.setAttribute("hit", hit);
 
-//        HitStorage hitStorage = (HitStorage) request.getSession().getAttribute("hitStorage");
-//        hitStorage.add(hit);
-//        logger.info(String.valueOf(hitStorage.getCount()));
+        ((HitStorage) request.getSession().getAttribute("hitStorage")).add(hit);
 
         response.setHeader("Cache-Control", "no-cache");
         response.setContentType("application/json; charset=UTF-8");

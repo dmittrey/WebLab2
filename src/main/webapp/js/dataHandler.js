@@ -35,16 +35,7 @@ setRValue = (target) => {
 
 }
 
-// Нужна ли тут подстановка значений?
 validateForm = () => {
-    // console.log(validateButtonExist(values.x));
-    // console.log(validateTextExist(values.y));
-    // console.log(validateTextExist(values.r));
-    // console.log(validateTextForm(values.y));
-    // console.log(validateTextForm(values.r));
-    // console.log(validateXRange(values.x));
-    // console.log(validateYRange(values.y));
-    // console.log(validateRRange(values.r));
     return validateX(values.x) &&
         validateY(values.y) &&
         validateR(values.r);

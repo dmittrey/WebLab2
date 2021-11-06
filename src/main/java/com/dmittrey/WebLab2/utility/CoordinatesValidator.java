@@ -1,4 +1,4 @@
-package com.dmittrey.WebLab2.servlets;
+package com.dmittrey.WebLab2.utility;
 
 import lombok.NoArgsConstructor;
 

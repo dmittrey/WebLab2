@@ -30,8 +30,9 @@ window.onload = () => {
         injectRAlert(r.value);
     });
 
-    $('#cleaner').on("click", (e) => {
+    $('#cleaner').on("click", () => {
         cleanPlot();
         cleanTable();
+        clearRequest();
     });
 }

@@ -1,5 +1,5 @@
 <%@ page import="com.dmittrey.WebLab2.entities.Hit" %>
-<%@ page import="com.dmittrey.WebLab2.servlets.HitListFormatter" %>
+<%@ page import="com.dmittrey.WebLab2.utility.HitListFormatter" %>
 <jsp:useBean id="hitStorage" scope="session" class="com.dmittrey.WebLab2.beans.HitStorage"/>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -42,7 +42,7 @@
         <div id='plot'></div>
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
-        <form id="form" onsubmit="return send_origin_request()">
+        <form id="form" onsubmit="return sendOriginRequest()">
             <!-- Блок для ввода значений переменных -->
             <div class="values">
 
@@ -98,9 +98,9 @@
     <section class="table_section">
 
         <!-- Кнопка очистки таблицы -->
-        <%--        <div id="cleaner">--%>
-        <%--            <button>CLEAN TABLE</button>--%>
-        <%--        </div>--%>
+                <div id="cleaner">
+                    <button>CLEAN TABLE</button>
+                </div>
 
         <!-- Таблица регистрирующая попадания -->
         <div>

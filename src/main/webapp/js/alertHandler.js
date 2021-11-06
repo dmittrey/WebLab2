@@ -60,9 +60,3 @@ rAlerts = (field) => {
         } else return R_FORM_ALERT;
     } else return R_EXIST_ALERT;
 }
-
-// cleanAlerts = () => {
-//     ERROR_X.empty();
-//     ERROR_Y.empty();
-//     ERROR_R.empty();
-// }

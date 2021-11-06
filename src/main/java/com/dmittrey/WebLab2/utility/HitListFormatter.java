@@ -1,4 +1,4 @@
-package com.dmittrey.WebLab2.servlets;
+package com.dmittrey.WebLab2.utility;
 
 import com.dmittrey.WebLab2.beans.HitStorage;
 import lombok.AllArgsConstructor;

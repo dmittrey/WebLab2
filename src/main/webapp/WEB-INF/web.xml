@@ -13,7 +13,6 @@
         <url-pattern>controller</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>AreaCheckServlet</servlet-name>
         <servlet-class>com.dmittrey.WebLab2.servlets.AreaCheckServlet</servlet-class>
@@ -21,5 +20,14 @@
     <servlet-mapping>
         <servlet-name>AreaCheckServlet</servlet-name>
         <url-pattern>check</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SessionWorkerServlet</servlet-name>
+        <servlet-class>com.dmittrey.WebLab2.servlets.SessionWorkerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SessionWorkerServlet</servlet-name>
+        <url-pattern>sessionClear</url-pattern>
     </servlet-mapping>
 </web-app>

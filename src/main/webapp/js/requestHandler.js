@@ -1,14 +1,28 @@
-send_graph_request = (coordinates) => {
+sendGraphRequest = (coordinates) => {
     if (coordinates.r !== "") {
         request(coordinates);
     }
 }
 
-send_origin_request = () => {
+sendOriginRequest = () => {
     if (validateForm()) {
         request(getValues());
     } else injectAlerts();
     return false;
+}
+
+clearRequest = () => {
+    $.ajax({
+        url: "./controller",
+        type: "POST",
+        data: {'session': 'clear'},
+        success: function () {
+            console.log("Session cleared successful");
+        },
+        error: function () {
+            $('#Alert_text').html("Something wrong with clearing session!");
+        }
+    });
 }
 
 request = (coordinates) => {
@@ -17,9 +31,6 @@ request = (coordinates) => {
         type: "POST",
         data: {'x': coordinates.x, 'y': coordinates.y, 'r': coordinates.r},
         success: function (resp) {
-            // console.log(resp.length);
-            // $('#Alert_text').empty();
-            // cleanAlerts();
             console.log(resp);
             addPoint(resp.x, resp.y, resp.r, resp.result);
             drawPoint(resp.x, resp.y, resp.result, resp.r);

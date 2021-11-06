@@ -12,7 +12,7 @@ let scale = 0.014;
 
 let attemptsArray = []
 
-let DEFAULT_R = 5;
+let DEFAULT_R = 3;
 
 drawPlot = () => {
     console.log("Starting drawing plot!")
@@ -159,7 +159,7 @@ drawPoint = (x, y, result, pointScale) => {
 clickPointEvent = (event) => {
     let coordinates = getCoords(event);
     console.log("Click working at coordinates: " + coordinates.x + ", " + coordinates.y + ", " + coordinates.r);
-    if (validateR(coordinates.r)) send_graph_request(coordinates);
+    if (validateR(coordinates.r)) sendGraphRequest(coordinates);
 }
 
 getCoords = (event) => {

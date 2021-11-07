@@ -9,7 +9,7 @@ drawTableRow = (x, y, r, currentTime, executionTime, result) => {
         ? "<th><span style='color: red'>FALSE</span></th>"
         : "<th><span style='color: green'>TRUE</span></th>";
     newRow += "</tr>";
-    $('#table tr:last').after(newRow);
+    $('#table tr:first').after(newRow);
 }
 
 cleanTable = () => {

@@ -4,11 +4,15 @@ main .user_input #plot {
     top: 100px;
     width: 400px;
     height: 400px;
-    /*border-style: dashed;*/
-    /*border-width: 2px;*/
     box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
     background: #1d1d1d;
     border-radius: 20px 20px 20px 20px;
+    transition: 0.5s
+}
+
+main .user_input #plot:hover {
+    box-shadow: 0 0 40px 5px #f41c52;
+    transition: 0.5s
 }
 
 main .user_input form {
@@ -16,10 +20,16 @@ main .user_input form {
     left: 700px;
     width: 500px;
     height: 400px;
-    bottom: 315px;
+    bottom: 316px;
     box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
     background: #1d1d1d;
     border-radius: 20px 20px 20px 20px;
+    transition: 0.5s
+}
+
+main .user_input form:hover {
+    box-shadow: 0 0 40px 5px #f41c52;
+    transition: 0.5s
 }
 
 main .user_input .X_value {
@@ -27,6 +37,10 @@ main .user_input .X_value {
     position: relative;
     top: 30px;
     left: 110px;
+}
+
+main .user_input .X_value input {
+    border-radius: 5px 5px 5px 5px;
 }
 
 main .user_input .selected {
@@ -42,6 +56,7 @@ main .user_input .Y_value {
 
 main .user_input .Y_value #Y_value {
     width: 195px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 main .user_input .R_value {
@@ -53,6 +68,7 @@ main .user_input .R_value {
 
 main .user_input .R_value #R_value {
     width: 195px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 main .user_input .Error_text {
@@ -92,8 +108,9 @@ main .user_input .buttons #reset {
 
 main .user_input #Alert_text {
     margin: 15px;
-    position: relative;
-    top: 180px;
+    position: absolute;
+    top: 320px;
+    left: 30px;
     text-align: center;
     display: flex;
     flex-direction: column;

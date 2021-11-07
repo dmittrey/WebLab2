@@ -60,3 +60,9 @@ rAlerts = (field) => {
         } else return R_FORM_ALERT;
     } else return R_EXIST_ALERT;
 }
+
+clearAlerts = () => {
+    $('#X_error').empty();
+    $('#Y_error').empty();
+    $('#R_error').empty();
+}

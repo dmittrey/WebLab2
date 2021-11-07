@@ -1,4 +1,3 @@
-<%@ page import="com.dmittrey.WebLab2.entities.Hit" %>
 <%@ page import="com.dmittrey.WebLab2.utility.HitListFormatter" %>
 <jsp:useBean id="hitStorage" scope="session" class="com.dmittrey.WebLab2.beans.HitStorage"/>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -28,9 +27,11 @@
 <!-- Шапка с именем и группой -->
 <header>
     <div>
-        <span>Dmitry Zubakhin</span>
-        <span>P3231</span>
-        <span>Variant 5487</span>
+        <a href="https://github.com/dmittrey/WebLab2" style="text-decoration: none; color: white">
+            <span>Dmitry Zubakhin</span>
+            <span>P3231</span>
+            <span>Variant 5487</span>
+        </a>
     </div>
 </header>
 
@@ -65,7 +66,7 @@
 
                     <!-- Поле ввода значения Y -->
                     <label for="Y_value">Y value:</label>
-                    <input type="text" id="Y_value" name="Y_value" placeholder="Enter coordinate Y" maxlength="5">
+                    <input type="text" id="Y_value" name="Y_value" placeholder="Enter coordinate Y" maxlength="6">
                 </div>
 
                 <!-- Блок для значения R -->
@@ -98,9 +99,9 @@
     <section class="table_section">
 
         <!-- Кнопка очистки таблицы -->
-                <div id="cleaner">
-                    <button>CLEAN TABLE</button>
-                </div>
+        <div id="cleaner">
+            <button>CLEAN TABLE</button>
+        </div>
 
         <!-- Таблица регистрирующая попадания -->
         <div>

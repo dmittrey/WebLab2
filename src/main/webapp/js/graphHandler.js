@@ -187,7 +187,7 @@ addPoint = (x, y, r, result) => {
 }
 
 resetDots = (newAttemptsArray) => {
-    if (newAttemptsArray.length !== 0) { // Новая ли сессия
+    if (newAttemptsArray.length !== 0) {
         attemptsArray = [];
         newAttemptsArray.forEach(dot => {
             attemptsArray.push(JSON.parse(dot));

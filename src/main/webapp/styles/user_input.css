@@ -12,7 +12,6 @@ main .user_input #plot {
 
 main .user_input #plot:hover {
     box-shadow: 0 0 40px 5px #f41c52;
-    transition: 0.5s
 }
 
 main .user_input form {
@@ -24,12 +23,11 @@ main .user_input form {
     box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
     background: #1d1d1d;
     border-radius: 20px 20px 20px 20px;
-    transition: 0.5s
+    transition: 0.5s;
 }
 
 main .user_input form:hover {
     box-shadow: 0 0 40px 5px #f41c52;
-    transition: 0.5s
 }
 
 main .user_input .X_value {

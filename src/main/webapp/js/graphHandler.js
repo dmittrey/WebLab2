@@ -164,8 +164,8 @@ clickPointEvent = (event) => {
 
 getCoords = (event) => {
     let coordinates = {};
-    coordinates.x = convertToCoordinatesX(event.pageX - 100);
-    coordinates.y = convertToCoordinatesY(event.pageY - 183);
+    coordinates.x = convertToCoordinatesX(event.pageX - 99.5);
+    coordinates.y = convertToCoordinatesY(event.pageY - 175);
     coordinates.r = $("#R_value").val();
     return coordinates;
 }

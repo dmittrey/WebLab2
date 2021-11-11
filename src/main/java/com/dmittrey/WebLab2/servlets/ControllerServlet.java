@@ -1,6 +1,7 @@
 package com.dmittrey.WebLab2.servlets;
 
-import com.dmittrey.WebLab2.utility.CoordinatesValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,27 +12,31 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class ControllerServlet extends HttpServlet {
+    private final Logger logger = LoggerFactory.getLogger("ControllerServlet");
 
-    CoordinatesValidator coordinatesValidator = new CoordinatesValidator();
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        process(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        process(request, response);
+    }
+
+    protected void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         if (Optional.ofNullable(request.getParameter("session")).orElse("").equals("clear")) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./sessionClear");
-            dispatcher.forward(request, response);
+            logger.info("Client wants to clear session. Redirect to session worker");
+            request.getRequestDispatcher("./sessionClear").forward(request, response);
         } else {
-            request.setAttribute("startTime", System.nanoTime());
-            boolean dataIsCorrect = coordinatesValidator.validate(
-                    request.getParameter("x"),
-                    request.getParameter("y"),
-                    request.getParameter("r")
-            );
-            if (dataIsCorrect) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("./check");
-                dispatcher.forward(request, response);
-            } else {
+            if (request.getAttribute("coordinates") == null) {
+                logger.info("Wrong argument's in request");
                 response.sendError(400, "Server can't validate data!");
+                // TODO: 11.11.2021 Надо разобраться как серверу отправить сообщение с ошибкой
+            } else {
+                logger.info("Coordinates are correct. Redirect to checker");
+                request.getRequestDispatcher("./check").forward(request, response);
             }
         }
     }

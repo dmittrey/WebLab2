@@ -121,9 +121,7 @@
     </section>
 </main>
 <script>
-    {
-        resetDots(<%=HitListFormatter.getJson(hitStorage)%>)
-    }
+    {resetDots(<%=HitListFormatter.getJson(hitStorage)%>)}
 </script>
 </body>
 </html>

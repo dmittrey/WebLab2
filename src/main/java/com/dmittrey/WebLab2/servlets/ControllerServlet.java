@@ -3,7 +3,6 @@ package com.dmittrey.WebLab2.servlets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +31,8 @@ public class ControllerServlet extends HttpServlet {
         } else {
             if (request.getAttribute("coordinates") == null) {
                 logger.info("Wrong argument's in request");
-                response.sendError(400, "Server can't validate data!");
-                // TODO: 11.11.2021 Надо разобраться как серверу отправить сообщение с ошибкой
+                response.setStatus(400);
+                response.getWriter().println("Server can't validate data!");
             } else {
                 logger.info("Coordinates are correct. Redirect to checker");
                 request.getRequestDispatcher("./check").forward(request, response);

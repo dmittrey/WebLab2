@@ -40,8 +40,7 @@ request = (coordinates) => {
             $('#Alert_text').empty();
         },
         error: function (resp) {
-
-            $('#Alert_text').html("The parameters go out of the acceptable range!");
+            $('#Alert_text').html(resp.responseText);
         }
     });
 }

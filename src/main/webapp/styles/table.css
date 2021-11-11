@@ -15,17 +15,14 @@ main .table_section #cleaner button {
     background: rgba(0, 0, 0, 0.83);
     width: 175px;
     height: 40px;
-    /*transition: 0.5s*/
 }
 
 main .table_section #cleaner button:hover {
     box-shadow: 0 0 10px 5px navajowhite;
-    /*transition: 0.5s*/
 }
 
 main .table_section #cleaner button:active {
     box-shadow: 0 0 10px 5px #f41c52;
-    /*transition: 0.5s*/
 }
 
 main .table_section #table {
@@ -38,7 +35,7 @@ main .table_section #table {
 }
 
 main .table_section #table:hover {
-    box-shadow: 0 0 15px 5px #f41c52;
+    box-shadow: 0 0 40px 5px #f41c52;
 }
 
 #table tr:first-of-type {

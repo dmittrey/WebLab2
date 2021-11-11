@@ -10,7 +10,7 @@ const RECTANGLE_COLOR = '#232370';
 
 let scale = 0.014;
 
-let attemptsArray = []
+let attemptsArray = [];
 
 let DEFAULT_R = 3;
 
@@ -40,11 +40,7 @@ drawPlotWithPoints = (attemptsArray) => {
     drawArea(DEFAULT_R);
     drawAxes();
     drawAxesScaleLabels(DEFAULT_R);
-    attemptsArray.forEach(point => {
-        console.log(point);
-        console.log(point.x);
-        drawPoint(point.x, point.y, point.result, DEFAULT_R);
-    });
+    attemptsArray.forEach(point => drawPoint(point.x, point.y, point.result, DEFAULT_R));
     drawRValue(DEFAULT_R);
 }
 

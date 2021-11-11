@@ -82,6 +82,7 @@ main .user_input .Error_text {
 
 main .user_input .Error_text span {
     margin: 4px;
+    font-family: sans-serif;
 }
 
 main .user_input .buttons {
@@ -107,11 +108,12 @@ main .user_input .buttons #reset {
 main .user_input #Alert_text {
     margin: 15px;
     position: absolute;
+    width: 100%;
     top: 320px;
-    left: 30px;
     text-align: center;
     display: flex;
     flex-direction: column;
     color: red;
+    font-family: sans-serif;
     font-size: 20px;
 }

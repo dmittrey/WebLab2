@@ -160,6 +160,7 @@ clickPointEvent = (event) => {
     let coordinates = getCoords(event);
     console.log("Click working at coordinates: " + coordinates.x + ", " + coordinates.y + ", " + coordinates.r);
     if (validateR(coordinates.r)) sendGraphRequest(coordinates);
+    else injectRAlert(coordinates.r);
 }
 
 getCoords = (event) => {

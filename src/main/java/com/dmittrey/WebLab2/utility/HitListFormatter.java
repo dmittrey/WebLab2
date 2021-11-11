@@ -8,24 +8,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
-public class HitListFormatter {
+public class  HitListFormatter {
 
     private final HitStorage hitStorage;
 
     public String getRows() {
         StringBuilder rows = new StringBuilder();
-        hitStorage.getHitList().forEach(hit -> {
-            rows.append("<tr>")
-                    .append("<th>").append(String.format("%.3f", hit.getX())).append("</th>")
-                    .append("<th>").append(String.format("%.3f", hit.getY())).append("</th>")
-                    .append("<th>").append(String.format("%.3f", hit.getR())).append("</th>")
-                    .append("<th>").append(hit.getCurrentTime()).append("</th>")
-                    .append("<th>").append(hit.getExecutionTime()).append("</th>")
-                    .append("<th>")
-                    .append(((hit.isResult()) ? "<span style='color: green'>TRUE" : "<span style='color: red'>FALSE"))
-                    .append("</span>").append("</th>")
-                    .append("</tr>");
-        });
+        hitStorage.getHitList().forEach(hit -> rows.append("<tr>")
+                .append("<th>").append(String.format("%.3f", hit.getX())).append("</th>")
+                .append("<th>").append(String.format("%.3f", hit.getY())).append("</th>")
+                .append("<th>").append(String.format("%.3f", hit.getR())).append("</th>")
+                .append("<th>").append(hit.getCurrentTime()).append("</th>")
+                .append("<th>").append(hit.getExecutionTime()).append("</th>")
+                .append("<th>")
+                .append(((hit.isResult()) ? "<span style='color: green'>TRUE" : "<span style='color: red'>FALSE"))
+                .append("</span>").append("</th>")
+                .append("</tr>"));
         return rows.toString();
     }
 

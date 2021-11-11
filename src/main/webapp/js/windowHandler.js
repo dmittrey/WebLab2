@@ -2,6 +2,7 @@ window.onload = () => {
     {drawPlot()}
 
     $("#plot").on("click", (e) => {
+        clearAlerts();
         clickPointEvent(e);
     });
 
@@ -13,7 +14,7 @@ window.onload = () => {
         injectXAlert(x.value);
     });
 
-    $('#Y_value').on("change", (e) => {
+    $('#Y_value').on("input", (e) => {
         let y = e.target;
         if (validateY(y.value)) {
             setYValue(y);
@@ -21,7 +22,7 @@ window.onload = () => {
         injectYAlert(y.value);
     });
 
-    $('#R_value').on("change", (e) => {
+    $('#R_value').on("input", (e) => {
         let r = e.target;
         if (validateR(r.value)) {
             setRValue(r);

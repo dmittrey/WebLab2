@@ -13,6 +13,12 @@ let values = {
     r: null
 };
 
+loadValues = () => {
+    values.x = $('.X_value .selected').val();
+    values.y = $('#Y_value').val();
+    values.r = $("#R_value").val();
+}
+
 getValues = () => {
     return values;
 }

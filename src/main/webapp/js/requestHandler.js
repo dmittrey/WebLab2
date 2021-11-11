@@ -5,6 +5,7 @@ sendGraphRequest = (coordinates) => {
 }
 
 sendOriginRequest = () => {
+    loadValues();
     if (validateForm()) {
         request(getValues());
     } else injectAlerts();

@@ -20,7 +20,7 @@ public class ValidationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        logger.info("Got a new {}", servletRequest);
+//        logger.info("Got a new {}", servletRequest);
         servletRequest.setAttribute("startTime", System.nanoTime());
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
 
@@ -38,9 +38,10 @@ public class ValidationFilter implements Filter {
             } catch (NullPointerException | NumberFormatException | OutOfBoundCoordinates e) {
                 logger.info("Error detected by validation filter. Message: {}", e.getMessage());
             }
-        } else {
-            logger.info("{} request came to Validation Filter", httpRequest.getMethod());
         }
+//        else {
+//            logger.info("{} request came to Validation Filter", httpRequest.getMethod());
+//        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

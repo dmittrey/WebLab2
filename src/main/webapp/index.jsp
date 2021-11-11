@@ -2,7 +2,6 @@
 <jsp:useBean id="hitStorage" scope="session" class="com.dmittrey.WebLab2.beans.HitStorage"/>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%HitListFormatter beanFormatter = new HitListFormatter(hitStorage);%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -116,14 +115,14 @@
                     <th>EXECUTION TIME</th>
                     <th>HIT RESULT</th>
                 </tr>
-                <%=beanFormatter.getRows()%>
+                <%=HitListFormatter.getRows(hitStorage)%>
             </table>
         </div>
     </section>
 </main>
 <script>
     {
-        resetDots(<%=beanFormatter.getJson()%>)
+        resetDots(<%=HitListFormatter.getJson(hitStorage)%>)
     }
 </script>
 </body>

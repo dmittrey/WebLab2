@@ -1,9 +1,6 @@
 package com.dmittrey.WebLab2.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.kopitubruk.util.json.JSONUtil;
 
 import java.io.Serializable;
@@ -13,7 +10,7 @@ import java.util.Map;
 /**
  * Bean class to save hits
  */
-@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString

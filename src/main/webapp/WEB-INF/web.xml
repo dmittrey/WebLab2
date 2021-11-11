@@ -30,4 +30,22 @@
         <servlet-name>SessionWorkerServlet</servlet-name>
         <url-pattern>sessionClear</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>HitServiceServlet</servlet-name>
+        <servlet-class>com.dmittrey.WebLab2.servlets.HitServiceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HitServiceServlet</servlet-name>
+        <url-pattern>hitService</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>filter</filter-name>
+        <filter-class>com.dmittrey.WebLab2.filter.ValidationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>filter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
 </web-app>

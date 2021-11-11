@@ -13,7 +13,17 @@ import java.io.IOException;
 public class AreaCheckServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger("AreaCheckServlet");
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        process(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        process(request, response);
+    }
+
+    private void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         Coordinates coordinates = (Coordinates) request.getAttribute("coordinates");
 

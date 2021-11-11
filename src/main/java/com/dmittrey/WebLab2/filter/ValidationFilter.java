@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 public class ValidationFilter implements Filter {
     private final Logger logger = LoggerFactory.getLogger("ValidationFilter");
-    private final CoordinatesValidator validator = new CoordinatesValidator();
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -33,7 +32,7 @@ public class ValidationFilter implements Filter {
                 logger.info("Coordinates values are x: {}, y: {}, r: {}", x, y, r);
                 Coordinates coordinates = new Coordinates(x, y, r);
 
-                validator.validate(coordinates);
+                CoordinatesValidator.validate(coordinates);
 
                 servletRequest.setAttribute("coordinates", coordinates);
             } catch (NullPointerException | NumberFormatException | OutOfBoundCoordinates e) {

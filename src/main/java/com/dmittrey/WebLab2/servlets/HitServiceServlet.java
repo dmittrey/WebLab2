@@ -18,7 +18,16 @@ public class HitServiceServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger("HitServiceServlet");
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        process(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        process(request, response);
+    }
+
+    private void process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Coordinates coordinates = (Coordinates) request.getAttribute("coordinates");
 

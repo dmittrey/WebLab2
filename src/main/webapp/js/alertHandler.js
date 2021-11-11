@@ -19,17 +19,14 @@ injectAlerts = () => {
 }
 
 injectXAlert = (x) => {
-    console.log(xAlerts(x));
     $('#X_error').html(xAlerts(x));
 }
 
 injectYAlert = (y) => {
-    console.log(yAlerts(y));
     $('#Y_error').html(yAlerts(y));
 }
 
 injectRAlert = (r) => {
-    console.log(rAlerts(r));
     $('#R_error').html(rAlerts(r));
 }
 
@@ -66,4 +63,8 @@ clearAlerts = () => {
     $('#Y_error').empty();
     $('#R_error').empty();
     $('#Alert_text').empty()
+}
+
+clearServerAlert = () => {
+    $('#Alert_text').empty();
 }

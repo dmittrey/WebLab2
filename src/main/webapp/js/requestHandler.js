@@ -33,13 +33,14 @@ request = (coordinates) => {
         type: "POST",
         data: {'x': coordinates.x, 'y': coordinates.y, 'r': coordinates.r},
         success: function (resp) {
-            console.log(resp);
+            // console.log(resp);
             addPoint(resp.x, resp.y, resp.r, resp.result);
             drawPoint(resp.x, resp.y, resp.result, resp.r);
             drawTableRow(resp.x, resp.y, resp.r, resp.currentTime, resp.executionTime, resp.result);
             $('#Alert_text').empty();
         },
-        error: function () {
+        error: function (resp) {
+
             $('#Alert_text').html("The parameters go out of the acceptable range!");
         }
     });

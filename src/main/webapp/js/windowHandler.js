@@ -2,7 +2,7 @@ window.onload = () => {
     {drawPlot()}
 
     $("#plot").on("click", (e) => {
-        clearAlerts();
+        clearServerAlert();
         clickPointEvent(e);
     });
 

@@ -27,7 +27,6 @@ setXValue = (target) => {
     $('.X_value input[type="button"]').removeClass('selected');
     $(target).addClass('selected');
     values.x = target.value;
-    console.log("value x: " + values.x);
 }
 
 clearX = () => {
@@ -36,13 +35,10 @@ clearX = () => {
 
 setYValue = (target) => {
     values.y = target.value;
-    console.log("value y: " + values.y);
 }
 
 setRValue = (target) => {
     values.r = target.value;
-    console.log("value r: " + values.r);
-
 }
 
 validateForm = () => {

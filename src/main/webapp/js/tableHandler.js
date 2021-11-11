@@ -1,8 +1,8 @@
 drawTableRow = (x, y, r, currentTime, executionTime, result) => {
     let newRow = "<tr>";
-    newRow += "<th>" + parseFloat(x).toFixed(2) + "</th>";
-    newRow += "<th>" + parseFloat(y).toFixed(2) + "</th>";
-    newRow += "<th>" + parseFloat(r).toFixed(2) + "</th>";
+    newRow += "<th>" + parseFloat(x).toFixed(3) + "</th>";
+    newRow += "<th>" + parseFloat(y).toFixed(3) + "</th>";
+    newRow += "<th>" + parseFloat(r).toFixed(3) + "</th>";
     newRow += "<th>" + currentTime + "</th>";
     newRow += "<th>" + executionTime + "</th>";
     newRow += (result === "false" || result === undefined)

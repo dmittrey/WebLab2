@@ -43,7 +43,9 @@
         <div id='plot'></div>
 
         <!-- Форма для отправки данных серверу с помощью метода POST -->
-        <form id="form" onsubmit="return sendOriginRequest()">
+        <form id="form"
+              onsubmit="return sendOriginRequest()"
+              onreset="clearAlerts(); clearX();">
             <!-- Блок для ввода значений переменных -->
             <div class="values">
 

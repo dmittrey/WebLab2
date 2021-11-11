@@ -30,6 +30,10 @@ setXValue = (target) => {
     console.log("value x: " + values.x);
 }
 
+clearX = () => {
+    $('.X_value input[type="button"]').removeClass('selected');
+}
+
 setYValue = (target) => {
     values.y = target.value;
     console.log("value y: " + values.y);
@@ -85,7 +89,7 @@ validateTextExist = (field) => {
 }
 
 validateTextForm = (field) => {
-    return (/^(0$|-?[1-9]\d*(\.\d*[1-9]$)?|-?0\.\d*[1-9])$/).test(field);
+    return (/^(0$|-?[0-9]\d*(\.\d*[0-9]$)?|-?0\.\d*[0-9])$/).test(field);
 }
 
 validateXRange = (field) => {

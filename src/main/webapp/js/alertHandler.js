@@ -65,4 +65,5 @@ clearAlerts = () => {
     $('#X_error').empty();
     $('#Y_error').empty();
     $('#R_error').empty();
+    $('#Alert_text').empty()
 }
